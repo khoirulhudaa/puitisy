@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
 
   const pathname = usePathname()
 
-  const protectNavbar = pathname === '/login'
+  const protectNavbar = pathname === '/login' || pathname ===  '/register'
 
   return (
     <html lang="en">
@@ -31,17 +31,12 @@ export default function RootLayout({ children }) {
         {!protectNavbar && <Navbar />}
 
         {/* Content */}
-        {
-          !protectNavbar ? (
-            <section className="mt-[54px]">
-              {children}
-            </section>
-          ):
-            {children}
-        }
+        <section className={protectNavbar ? "" : "mt-[54px]"}>
+          {children}
+        </section>
         
         {/* Footer */}
-        <Footer />
+        {!protectNavbar && <Footer />}
       </body>
     </html>
   );
