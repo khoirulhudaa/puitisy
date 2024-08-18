@@ -1,113 +1,82 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import Hero from "@/components/hero";
+import Icons from "@/components/icons";
+import { useState } from "react";
+
+const Home = () => {
+
+  const [search, setSearch] = useState()
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <section className="w-screen">
+        <Hero />
+
+        {/* Content */}
+        <div className="w-full h-max py-4 px-12 box-border">
+          <div className="w-full mt-3">
+            <div className="flex items-center w-full">
+              <p className="font-bold text-[20px] mr-3 my-3 flex w-max">Author :</p>
+              {/* Search Author */}
+              <div className="w-[25%] flex py-3 items-center justify-between px-3 gap-3 rounded-lg border-[0.4px] border-[#BFBFBF]">
+                <Icons type="find" className="flex items-center justify-center w-3 h-3" />
+                <input type="text" name='search' value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari nama penulis" className="h-full w-[220px] text-slate-600 outline-0 border-0 text-[15px]" />
+                <Icons type="close" className="flex items-center justify-center w-3 h-3" onClick={() => setSearch('')} />
+              </div>
+              {/* Search */}
+
+              <p className="font-bold text-[20px] mr-1 ml-5 my-3 flex w-max">Title :</p>
+              <div className="w-[25%] ml-3 flex py-3 items-center justify-between px-3 gap-3 rounded-lg border-[0.4px] border-[#BFBFBF]">
+                <Icons type="find" className="flex items-center justify-center w-3 h-3" />
+                <input type="text" name='search' value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari judul puisi" className="h-full w-[220px] text-slate-600 outline-0 border-0 text-[15px]" />
+                <Icons type="close" className="flex items-center justify-center w-3 h-3" onClick={() => setSearch('')} />
+              </div>
+            </div>
+
+            {/* List Genre */}
+            <div className="w-max flex items-center mt-4 overflow-x-auto">
+              <p className="font-bold text-[20px] mr-3 my-3 flex w-max">Genre :</p>
+              <div className="flex items-center w-max overflow-x-auto">
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Personal Reflection</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Relationships</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Motivational</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Celebration</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Romantic</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Mystery</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Sadness</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Nature</div>
+                <div className="w-max h-max px-5 py-2 rounded-full flex items-center jutify-center cursor-pointer active:scale-[0.98] hover:bg-green-200 hover:text-green-800 mr-3 border border-slate-400">Life</div>
+              </div>
+            </div>
+
+            <hr className="my-7 w-full border border-slate-300" />
+
+            <div className="w-full flex flex-wrap justify-between">
+              {
+                Array.from({ length: 10 }, (index) => (
+                  <div key={index} className="w-[23%] mb-5 h-[350px] rounded-lg bg-white border border-slate-300 shadow-sm cursor-pointer active:scale-[0.98] duration-200 overflow-hiddeb">
+                  
+                    <div className="w-full h-1/2 overflow-hidde object-cover">
+                      <img src={''} alt="Poetry Cover" className="w-full h-full" />
+                    </div>
+    
+                    <div className="relative w-full p-3 h-1/2">
+                      <h2 className="max-w-[90%] text-[18px] overflow-hidden whitespace-nowrap overflow-ellipsis">Title Poetry</h2>
+                      <small className="max-w-[90%] text-[13px] overflow-hidden whitespace-nowrap overflow-ellipsis">Muhammad Khoirulhuda</small>
+                      <hr className="my-4 border border-slate-200" />
+                      <p className="bg-green-200 text-green-800 rounded-full absolute bottom-4 left-4 flex items-center justify-center px-4 py-2 w-max text-[14px] overflow-hidden whitespace-nowrap overflow-ellipsis">Romantic</p>
+                    </div>  
+    
+                  </div>
+                ))
+              }
+            </div>
+
+          </div>
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </section>
   );
 }
+
+export default Home
