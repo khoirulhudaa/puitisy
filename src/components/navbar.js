@@ -2,19 +2,24 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Face from '@/public/face.jpeg'
+import Flower1 from '@/public/flower1.png'
 
 const Navbar = () => {
 
   const [show, setShow] = useState(false)
 
   return (
-    <nav className='fixed z-[999999] top-0 left-0 px-10 w-screen flex items-center h-[54px] bg-white justify-between shadow-md'>
+    <nav className='fixed overflow-hidden z-[999999] top-0 left-0 px-10 w-screen flex items-center h-[54px] bg-white justify-between shadow-md'>
+        
+        {/* Flower */}
+        
         <div className='w-1/2 h-full flex items-center'>
             <h2 className='flex items-center text-[24px] font-bold'>
                 <Link href={'/'}>
                     P.U.I.T.I.S.Y.
                 </Link>
             </h2>
+            <Image src={Flower1} alt='flower' width={30} height={30} className='relative ml-1 top-[0%] transform rotate-[170deg] z-[1] opacity-70' />
         </div>
         <div className='flex items-center justify-end w-max h-full'>
             <ul className='w-max flex items-center list-style-none'>

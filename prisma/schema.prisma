@@ -17,12 +17,13 @@ model user {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   idUnique  String
   penName   String 
-  email     String
+  email     String  @unique
   password  String
   bionarasi String?
   instagram String?
   year      String?
   gender    String?
+  avatar    String?
   country   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -30,7 +31,7 @@ model user {
 
 model poetry {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
-  idUnique        String
+  idUnique        String @unique
   title           String
   content         String
   synopsis        String
