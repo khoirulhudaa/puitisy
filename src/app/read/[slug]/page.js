@@ -1,23 +1,27 @@
 "use client";
 
+import Flower1 from '@/public/flower1.png';
+import Share from '@/public/share.png';
+import Download from '@/public/unduh.png';
+import User from '@/public/user.png';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Flower1 from '@/public/flower1.png'
-import Download from '@/public/unduh.png'
-import Share from '@/public/share.png'
-import User from '@/public/user.png'
 
 const Page = () => {
-  const router = useParams();
-
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const pathname = usePathname();
   const { id, slug } = useParams()
 
   useEffect(() => {
-  }, []);
+    if (typeof window !== 'undefined') {
+      // Simpan pathname ke localStorage
+      localStorage.setItem('lastPathname', pathname);
+    }
+  }, [pathname]);
+
 
   useEffect(() => {
     if (id && slug) {

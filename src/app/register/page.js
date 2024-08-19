@@ -1,12 +1,12 @@
 "use client";
 
 import Icons from '@/components/icons';
-import Image from 'next/image'
-import { useState } from 'react'
-import '../globals.css'
-import BgLogin from '@/public/register.jpeg'
-import Flower1 from '@/public/flower1.png'
+import Flower1 from '@/public/flower1.png';
+import BgLogin from '@/public/register.jpeg';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import '../globals.css';
 
 const Page = () => {
 

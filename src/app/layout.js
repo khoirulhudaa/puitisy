@@ -5,12 +5,16 @@ import "./globals.css";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "@/Redux/Store";
 
 export default function RootLayout({ children }) {
 
   const pathname = usePathname()
 
-  const protectNavbar = pathname === '/login' || pathname ===  '/register'
+  const protectNavbar = pathname === '/login' || pathname ===  '/register' ||  pathname.includes('/upload') ||  pathname.includes('/edit'); ; 
+
 
   return (
     <html lang="en">
@@ -27,16 +31,17 @@ export default function RootLayout({ children }) {
           <meta name="description" content="A place for writers to work digitally" />
         </Head>
 
-        {/* Navbar */}
-        {!protectNavbar && <Navbar />}
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            {!protectNavbar && <Navbar />}
 
-        {/* Content */}
-        <section className={protectNavbar ? "" : "mt-[54px]"}>
-          {children}
-        </section>
-        
-        {/* Footer */}
-        {!protectNavbar && <Footer />}
+            <section className={protectNavbar ? "" : "mt-[54px]"}>
+              {children}
+            </section>
+
+            {!protectNavbar && <Footer />}
+          </PersistGate>
+        </Provider>
       </body>
     </html>
   );

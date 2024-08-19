@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  idUnique  String
+  penName   String 
+  email     String
+  password  String
+  bionarasi String?
+  instagram String?
+  year      String?
+  gender    String?
+  country   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model poetry {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  idUnique        String
+  title           String
+  content         String
+  synopsis        String
+  genre           String
+  originalWork    Boolean @default(true)
+  source          String?
+  publish         Boolean @default(false)
+  typeNumberBook  String?
+  numberBook      String?
+  timeMarker      String
+  author          String
+  bionarasi       String
+  instagram       String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

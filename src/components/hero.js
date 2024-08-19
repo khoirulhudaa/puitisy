@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import Lines from '@/public/lines.png'
 import Flower1 from '@/public/flower1.png'
+import Link from 'next/link'
 
 const Hero = () => {
   return (
@@ -16,9 +17,11 @@ const Hero = () => {
         <div className='relative z-[33] text-center flex flex-col items-center'>
             <h className='text-[72px] font-normal relative text-transparent bg-clip-text bg-gradient-to-t from-slate-400 to-white'>Puitisy: Crafting Poetry</h>
             <p className='text-white text-[24px] w-[60%] mt-6'>– A digital space where words and poetic art unite, offering a platform for writers and readers to connect and create.</p>
-            <div className='rounded-md bg-white flex items-center justify-center cursor-pointer mt-10 hover:bg-slate-200 active:scale-[0.98] duration-100 px-8 py-3'>
-                <p>Create Poetry </p>
-            </div>
+            <Link href={`/upload/${'huda'}/poetry/1289129812`}>
+              <div className='rounded-md bg-white flex items-center justify-center cursor-pointer mt-10 hover:bg-slate-200 active:scale-[0.98] duration-100 px-8 py-3'>
+                  <p>Create Poetry </p>
+              </div>
+            </Link>
         </div> 
 
     </section>
