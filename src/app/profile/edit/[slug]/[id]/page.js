@@ -6,23 +6,37 @@ import Flower1 from '@/public/flower1.png'
 import Pen from '@/public/pen.png'
 import Save from '@/public/save.png'
 import Trashs from '@/public/trash.png'
+import store from '@/redux/Store'
+import { url_endpoint } from '@/services/Actions'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Swal from "sweetalert2"
 
 const Page = () => {
 
   const [name, setName] = useState('')
-  const [gender, setGender] = useState('')
+  const [gender, setGender] = useState('M')
+  const [year, setYear] = useState('')
+  const [instagram, setInstagram] = useState('')
   const [bionarasi, setBionarasi] = useState('')
   const [location, setLocation] = useState('')
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   
-  const { slug } = useParams() 
+  const { slug, id } = useParams() 
   const savedPathname = localStorage.getItem('lastPathname') ?? '/';
+  const auth = store.getState().Auth?.auth
+
+  useEffect(() => {
+    setName(auth?.penName)
+    setGender(auth?.gender === '-' ? 'M' : auth?.gender)
+    setYear(auth?.year)
+    setInstagram(auth?.instagram)
+    setBionarasi(auth?.bionarasi)
+    setLocation(auth?.country)
+  }, [])
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -38,42 +52,39 @@ const Page = () => {
     }
   };
     
-  const handleSubmit = async () => {
-    const data = new FormData();
-    data.append('oldImageId', oldImageId);
-    data.append('penName', name);
-    data.append('country', location);
-    data.append('bionarasi', bionarasi);
-    data.append('gender', gender);
-    data.append('oldImageId', oldImageId);
-    data.append('file', file);
-    data.append('userData', JSON.stringify(userData));
-
+  
+  const handleUpdateAccount = async () => {
     try {
-      const response = await axios.put('/api/user', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log('Response:', response.data);
-    } catch (error) {
-      console.error('Error:', error.response.data);
-    }
-  };
-    
-  const [error, setError] = useState('')
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top",
-    timer: 3000,
-    showConfirmButton: false,
-  });
+      const formData = new FormData()
+      formData.append('penName', name)
+      formData.append('gender', gender)
+      formData.append('year', year)
+      formData.append('country', location)
+      formData.append('instagram', instagram)
+      formData.append('bionarasi', bionarasi)
+      if (file) {
+        formData.append('avatar', file);
+      }
 
-  if (error !== "") {
-    Toast.fire({
-        icon: "error",
-        title: error ? error : "Email atau password salah",
-    });
+      const response = await url_endpoint.updateAccountById(decodeURIComponent(id), formData)
+      console.log('response update:', response)
+
+    } catch (error) {
+      console.log(error)
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        timer: 3000,
+        showConfirmButton: false,
+      });
+    
+      if (error !== "") {
+        Toast.fire({
+            icon: "error",
+            title: error ? error : "Email atau password salah",
+        });
+      }
+    }
   }
 
   return (
@@ -110,7 +121,7 @@ const Page = () => {
               )
             }
 
-            <div onClick={() => handleSubmit()} title='edit-profile' className='absolute right-8 w-[40px] p-3 h-[40px] bottom-8 bg-white shadaw-md flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
+            <div onClick={() => handleUpdateAccount()} title='edit-profile' className='absolute right-8 w-[40px] p-3 h-[40px] bottom-8 bg-white shadaw-md flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
                 <Image src={Save} alt='icon-save' width={20} height={20} />
             </div>
         </div>
@@ -133,10 +144,10 @@ const Page = () => {
                       <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                       <input 
                           type='text' 
-                          name='bionarasi' 
-                          value={bionarasi} 
+                          name='year' 
+                          value={year} 
                           placeholder='2003' 
-                          onChange={(e) => setBionarasi(e.target.value)} 
+                          onChange={(e) => setyear(e.target.value)} 
                           className='w-full h-full py-4 outline-0 text-[18px]' 
                       />
                       </div>
@@ -181,6 +192,19 @@ const Page = () => {
                     value={bionarasi} 
                     placeholder='Enter Your Bionarasi...' 
                     onChange={(e) => setBionarasi(e.target.value)} 
+                    className='w-full h-full py-4 outline-0 text-[18px]' 
+                />
+                </div>
+            </div>
+            <div className='w-full flex flex-col h-max mb-5'>
+                <label className='mb-6 text-[18px]'>Instagram</label>
+                <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <input 
+                    type='text' 
+                    name='instagram' 
+                    value={instagram} 
+                    placeholder='Enter Your Instagram...' 
+                    onChange={(e) => setInstagram(e.target.value)} 
                     className='w-full h-full py-4 outline-0 text-[18px]' 
                 />
                 </div>

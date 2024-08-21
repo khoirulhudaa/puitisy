@@ -22,6 +22,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+#form::-webkit-scrollbar {
+    display: none;
+}
+
 .ck-editor__editable_inline {
     min-height: 400px;
 }
@@ -45,4 +49,26 @@ body::-webkit-scrollbar {
     position: relative;
     margin-top: 70px;
     width: max-content;
+}
+
+.my-toast-auth {
+    z-index: 999999999999999999999;
+    position: relative;
+    width: max-content;
+}
+
+.confirm-button {
+    padding: 8px 36px;
+}
+
+.cancel-button {
+    padding: 8px 36px;
+}
+
+.ask-popup {
+    width: 30vw;
+}
+
+.ask-title {
+    font-size: 1.6rem;
 }

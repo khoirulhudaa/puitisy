@@ -1,21 +1,39 @@
 "use client"
 
-import Profile from '@/public/face.jpeg'
 import ArrowLeft from '@/public/arrow-left.png'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import Default from '@/public/default.jpeg'
 import Dummy from '@/public/dummy.jpeg'
 import Flower1 from '@/public/flower1.png'
 import Male from '@/public/male.png'
+import Female from '@/public/female.png'
+import Netral from '@/public/N.png'
 import Pen from '@/public/pen.png'
-import Trash from '@/public/trash.png'
 import Plus from '@/public/plus.png'
+import Trash from '@/public/trash.png'
+import { url_endpoint } from '@/services/Actions'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import calculateDifference from '@/app/helpers/getAge'
 
 const Page = () => {
   
-  const { slug } = useParams() 
+  const [data, setData] = useState(null)
+
+  const { id, slug } = useParams() 
   const savedPathname = localStorage.getItem('lastPathname') ?? '/';
+  console.log(id, slug)
+
+  useEffect(() => {
+    const getAccount = async () => {
+      const response = await url_endpoint.getAccountById(id)
+      console.log(response?.data?.data)
+      setData(response?.data?.data)
+    }
+
+    getAccount()
+  }, [])
 
   return (
     <section className='w-screen min-h-[90vh] overflow-hidden'>
@@ -24,10 +42,10 @@ const Page = () => {
             <h1 className='absolute w-full z-[1] opacity-80 text-[104px] text-center text-white flex items-center justify-center transform translate-x-[0%] top-[40%]'>P.O.E.T.R.Y</h1>
             <h1 className='absolute w-max z-[1] opacity-80 text-[54px] text-center text-white right-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
             <div className='relative z-[333] w-[180px] h-[180px] p-1 rounded-full overflow-hidden bg-white shadow-md border border-white'>
-                <Image src={Profile} alt='photo-profile' width={200} height={200} className='w-full h-full hover:scale-[1.2] duration-300 hover:grayscale-[50%] object-cover rounded-full' />
+                <Image src={data && data.avatar === 'default' ? Default : data?.avatar} alt='photo-profile' width={200} height={200} className='w-full h-full hover:scale-[1.2] duration-300 hover:grayscale-[50%] object-cover rounded-full' />
             </div>
             
-            <Link href={`/profile/edit/${slug}/profile/1`}>
+            <Link href={`/profile/edit/${slug}/${id}`}>
                 <div title='edit-profile' className='absolute right-8 w-[40px] p-3 h-[40px] bottom-8 bg-white shadaw-md flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
                     <Image src={Pen} alt='icon-pen' width={20} height={20} />
                 </div>
@@ -46,13 +64,14 @@ const Page = () => {
                   <p className='relative top-[-2px] ml-1'>profile <span className='mx-1'>/</span> {slug}</p>
               </div>
 
-              <p className='flex w-max'>2024 (21 - 22 tahun), <b className='ml-1'>Indonesia</b></p>
+              <p className='flex w-max'>{data && data?.year !== '-' ? data?.year : ''} ({data && data?.year !== '-' ? `${calculateDifference(data?.year)} tahun` : 'Usia belum diketahui' }), <b className='ml-1'>{data?.country}</b></p>
             </div>
 
             <hr className='my-6 border border-slate-300' />
 
-            <h2 className='font-bold flex items-center text-[36px]'>– Muhammad Khoirulhuda - <Image src={Male} alt='arrow-left' width={20} height={30} className='ml-3' /></h2>
-            <p className='w-[70%] text-slate-600 leading-loose'>– Mahasiswa semester 8 angkatan tahun 2021, asal dari prodi teknik informatika di STMIK IKMI KOTA CIREBON. Pria yang hobi berpuisi dan nogding serta olahrga futsal dan renang.</p>
+            <h2 className='font-bold flex items-center text-[36px]'>– {data?.penName ?? ''} - <Image src={data && data?.gender === 'M' ? Male : data && data?.gender === 'F' ? Female : Netral} alt='arrow-left' width={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} height={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} className='ml-3' /></h2>
+            <p className='w-[70%] text-slate-600 leading-loose'>– {data?.bionarasi !== null || data?.bionarasi === '-' ? 'Bionarration has not been added to this account' : data?.bionarasi}</p>
+            {/* <p className='w-[70%] text-slate-600 leading-loose'>– Mahasiswa semester 8 angkatan tahun 2021, asal dari prodi teknik informatika di STMIK IKMI KOTA CIREBON. Pria yang hobi berpuisi dan nogding serta olahrga futsal dan renang.</p> */}
             
             <hr className='my-6 border border-slate-300' />
 
