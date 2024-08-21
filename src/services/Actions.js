@@ -17,4 +17,9 @@ export const url_endpoint = {
 		return api.post(`/account/update/${user_id}`, data);
 	},
 
+
+	// Poetry
+	getAllPoetry: () => {
+		return api.get('/poetry')
+	}
 };

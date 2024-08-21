@@ -3,6 +3,7 @@
 import Hero from "@/components/hero";
 import Icons from "@/components/icons";
 import Dummy from '@/public/dummy.jpeg';
+import { url_endpoint } from "@/services/Actions";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,13 +12,24 @@ import Swal from "sweetalert2";
 
 const Home = () => {
 
-  const [searchAuthor, setSearchAuthor] = useState()
-  const [searchTitle, setSearchTitle] = useState()
+  const [searchAuthor, setSearchAuthor] = useState('')
+  const [allPoetry, setAllPotery] = useState([])
+  const [searchTitle, setSearchTitle] = useState('')
 
   const router = useRouter()
   const searchParams = useSearchParams()
 
   useEffect(() => {
+    const responseGetAllPoetry = async () => {
+      try {
+        const getPoetry = await url_endpoint.getAllPoetry();
+        setAllPotery(getPoetry?.data?.data)
+      } catch (error) {
+        console.error('Error fetching poetry data:', error);
+      }
+    };
+    responseGetAllPoetry();
+
     if(searchParams.get('success') === "true") {
       const Toast = Swal.mixin({
         toast: true,
@@ -98,9 +110,9 @@ const Home = () => {
 
             <div className="w-full flex flex-wrap justify-between">
               {
-                Array.from({ length: 10 }, (index) => (
-                  <Link href={'/read/ddsada'} className='w-[23%]  mb-5 h-[360px]'>
-                    <div key={index} className="w-full mb-5 h-full rounded-[12px] bg-white border border-slate-300 shadow-sm cursor-pointer duration-200 overflow-hidden">
+                Array.from({ length: 10 }, (_, index) => (
+                  <Link key={index} href={'/read/ddsada'} className='w-[23%]  mb-5 h-[360px]'>
+                    <div className="w-full mb-5 h-full rounded-[12px] bg-white border border-slate-300 shadow-sm cursor-pointer duration-200 overflow-hidden">
                   
                     <div className="relative w-full h-[60%] overflow-hidden object-cover">
                       <div className="absolute top-4 right-4 px-5 py-1 bg-slate-200 text-slate-800 shadow-md border border-white flex items-center justify-center rounded-full">

@@ -2,22 +2,40 @@
 
 import Head from "next/head";
 import "./globals.css";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "@/redux/Store";
+import { useEffect } from "react";
 
 export default function RootLayout({ children }) {
+  const auth = store.getState().Auth?.auth
   const pathname = usePathname();
+  const router = useRouter()
 
-  // Kondisi untuk menyembunyikan Navbar dan Footer pada halaman tertentu
   const protectNavbar =
     pathname === "/login" ||
     pathname === "/register" ||
     pathname.includes("/upload") ||
     pathname.includes("/edit");
+
+     // Redirect to login if auth is empty and user is not in a public path
+  useEffect(() => {
+    const isPublicPath =
+      pathname === "/" ||
+      pathname === "/login" ||
+      pathname === "/register" ||
+      pathname === "/forgot-password" ||
+      pathname === "/reset-password";
+
+    if (!auth || Object.keys(auth).length === 0) {
+      if (!isPublicPath) {
+        router.push("/login");
+      }
+    }
+  }, [auth, pathname, router]);
 
   return (
     <html lang="en">

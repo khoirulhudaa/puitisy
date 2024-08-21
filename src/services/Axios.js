@@ -12,9 +12,9 @@ export const api = axios.create({
 api.interceptors.request.use(
 	async function (config) {
 		const token = store.getState().Auth.token;
-
+		console.log('token:', token)
 		if (token) {
-			config.headers["Authorization"] = `Bearer ${token}`;
+			config.headers["Authorization"] = `${token}`;
 		}
 
 		if (config.data instanceof FormData) {
@@ -24,7 +24,7 @@ api.interceptors.request.use(
 		return config;
 	},
 	function (error) {
-		return Promise.reject(error);
+		return Promise.reject('error:', error);
 	}
 );
 
@@ -33,12 +33,13 @@ api.interceptors.response.use(
 		return response;
 	},
 	function (error) {
-		if (error.response.message === "Unauthenticated.") {
-			window.location.pathname = "/";
-		} else if (error.response.status === 400) {
+		if (error.response.data.message === "Unauthenticated.") {
+			window.location.pathname = "/login";
+		} else if (error.response.message === `You don't have access permissions.` || error.response.status === 403) {
 			console.log("Error: ", error?.response);
+			window.location.pathname = "/login";
 		}
 
-		return Promise.reject(error);
+		return Promise.reject('erro:', error);
 	}
 );
