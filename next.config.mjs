@@ -13,7 +13,10 @@ const nextConfig = {
     webpackDevMiddleware: config => {
         config.hot = false;
         return config;
-    }
+    },
+    images: {
+        domains: ['res.cloudinary.com'], // Tambahkan domain Cloudinary
+    },
 };
 
 export default nextConfig;

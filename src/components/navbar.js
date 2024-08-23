@@ -58,7 +58,7 @@ const Navbar = () => {
 
   const toProfile = () => {
     setShow(false)
-    router.push(`/profile/${auth?.user_id}/${auth?.penName}`)
+    router.push(`/profile/${auth?.penName}`)
   }
 
   return (

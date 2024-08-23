@@ -1,14 +1,14 @@
 "use client";
 
-import Head from "next/head";
-import "./globals.css";
-import { usePathname, useRouter } from "next/navigation";
-import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { persistor, store } from "@/redux/Store";
+import Head from "next/head";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "@/redux/Store";
-import { useEffect } from "react";
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   const auth = store.getState().Auth?.auth
@@ -21,14 +21,14 @@ export default function RootLayout({ children }) {
     pathname.includes("/upload") ||
     pathname.includes("/edit");
 
-     // Redirect to login if auth is empty and user is not in a public path
   useEffect(() => {
     const isPublicPath =
-      pathname === "/" ||
-      pathname === "/login" ||
-      pathname === "/register" ||
-      pathname === "/forgot-password" ||
-      pathname === "/reset-password";
+    pathname === "/" ||
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname === "/forgot-password" ||
+    pathname.includes("/reset-password") ||
+    pathname.includes("/upload");
 
     if (!auth || Object.keys(auth).length === 0) {
       if (!isPublicPath) {

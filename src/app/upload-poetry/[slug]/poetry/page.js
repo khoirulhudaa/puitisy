@@ -143,6 +143,26 @@ const Page = () => {
 
           <br />
 
+          <div className='w-full flex mt-1 mb-3 flex-col min-h-[60px]'>
+            <label className='mb-3 text-[16px]'>– Digital Book Category</label>
+            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+              <select className='w-full h-full py-5 outline-0' value={genre} onChange={(e) => setGenre(e.target.value)}>
+                <option value={'Personal Reflection'}>Personal Reflection</option>
+                <option value={'Relationships'}>Relationships</option>
+                <option value={'Motivational'}>Motivational</option>
+                <option value={'Celebration'}>Celebration</option>
+                <option value={'Romantic'}>Romantic</option>
+                <option value={'Mystery'}>Mystery</option>
+                <option value={'Sadness'}>Sadness</option>
+                <option value={'Nature'}>Nature</option>
+                <option value={'Life'}>Life</option>
+                <option value={'other'}>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <br />
+
           <label className='mb-3 text-[16px]'>– Original Work ?</label>
           <div className='flex items-center w-max mt-4 rounded-md border border-slate-300 p-2'>
               {['Y', 'N'].map((option) => (

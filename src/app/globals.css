@@ -51,6 +51,10 @@ body::-webkit-scrollbar {
     width: max-content;
 }
 
+.ask-title-delete {
+    font-size: 22px;
+}
+
 .my-toast-auth {
     z-index: 999999999999999999999;
     position: relative;

@@ -1,7 +1,7 @@
 "use client"
 
 import ArrowLeft from '@/public/arrow-left.png'
-import Profile from '@/public/face.jpeg'
+import Default from '@/public/default.jpeg'
 import Flower1 from '@/public/flower1.png'
 import Pen from '@/public/pen.png'
 import Save from '@/public/save.png'
@@ -10,7 +10,7 @@ import store from '@/redux/Store'
 import { url_endpoint } from '@/services/Actions'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Swal from "sweetalert2"
 
@@ -25,9 +25,10 @@ const Page = () => {
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   
-  const { slug, id } = useParams() 
-  const savedPathname = localStorage.getItem('lastPathname') ?? '/';
   const auth = store.getState().Auth?.auth
+  const { slug, id } = useParams() 
+  const savedPathname = `/profile/${auth?.penName}`;
+  const router = useRouter()
 
   useEffect(() => {
     setName(auth?.penName)
@@ -40,6 +41,7 @@ const Page = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log('file:', file)
     setFile(file)
 
     // Mengatur preview gambar
@@ -51,7 +53,6 @@ const Page = () => {
       reader.readAsDataURL(file);
     }
   };
-    
   
   const handleUpdateAccount = async () => {
     try {
@@ -67,7 +68,25 @@ const Page = () => {
       }
 
       const response = await url_endpoint.updateAccountById(decodeURIComponent(id), formData)
-      console.log('response update:', response)
+
+      if(response?.status === 200) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+
+        Toast.fire({
+            icon: "success",
+            customClass: {
+              popup: 'my-toast'
+            },
+            title: response?.data?.message,
+        });
+
+        router.push(`/profile/${name}`)
+      }
 
     } catch (error) {
       console.log(error)
@@ -102,7 +121,7 @@ const Page = () => {
                     </div>
                </div>
 
-                <Image src={Profile} alt='photo-profile' width={200} height={200} className='w-full h-full object-cover rounded-full' />
+                <Image src={auth && auth?.avatar !== 'default' ? auth?.avatar : Default} alt='photo-profile-main' width={200} height={200} className='w-full h-full object-cover rounded-full' />
             </div>
             {
               imagePreview && (
@@ -115,7 +134,7 @@ const Page = () => {
                           <Image src={Trashs} alt='photo-profile' width={15} height={15} />
                       </div>
 
-                      <Image src={imagePreview} alt='photo-profile' width={200} height={200} className='w-full h-full object-cover rounded-full' />
+                      <Image src={imagePreview} alt='photo-profile-update' width={200} height={200} className='w-full h-full object-cover rounded-full' />
                   </div>
                 </>
               )
@@ -130,7 +149,7 @@ const Page = () => {
             {/* Flower */}
             <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-15' />
 
-            <div className='w-full flex justify-between items-center'>
+            <div className='relative w-full z-[33] flex justify-between items-center'>
                 <div className='w-max flex items-center text-blue-600'>
                   <Link href={savedPathname}>
                       <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1' />
@@ -147,7 +166,7 @@ const Page = () => {
                           name='year' 
                           value={year} 
                           placeholder='2003' 
-                          onChange={(e) => setyear(e.target.value)} 
+                          onChange={(e) => setYear(e.target.value)} 
                           className='w-full h-full py-4 outline-0 text-[18px]' 
                       />
                       </div>

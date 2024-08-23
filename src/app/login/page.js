@@ -56,7 +56,7 @@ const Page = () => {
 
     const response = await url_endpoint.accountSignIn(data)
 
-    if(response.status === 200) {
+    if(response.data.status === 200) {
       console.log('data data:', response.data.data)
       dispatch(authSignIn(response?.data?.data))
       dispatch(saveToken(response?.data?.token))
@@ -75,10 +75,9 @@ const Page = () => {
           customClass: {
             popup: 'my-toast-auth'
           },
-          title: response.message ?? 'Error server!',
+          title: response.data?.message ?? 'Error server!',
       });
     }
-    console.log('response:', response.data)
   }
   
   return (
