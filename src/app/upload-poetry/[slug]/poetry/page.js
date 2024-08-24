@@ -7,34 +7,41 @@ import Upload2 from '@/public/upload2.jpeg';
 import Upload3 from '@/public/upload3.jpeg';
 import Upload4 from '@/public/upload4.jpeg';
 import Upload5 from '@/public/upload5.jpeg';
+import store from '@/redux/Store';
+import { url_endpoint } from '@/services/Actions';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import '../../../../globals.css';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import '../../../globals.css';
+import Spinner from '@/components/spinner';
 
 const Page = () => {
 
-  const [title, setTitle] = useState('') 
-  const [synopsis, setSynopsis] = useState('') 
-  const [code, setCode] = useState('') 
+  const [title, setTitle] = useState('-') 
+  const [code, setCode] = useState('-') 
   const [original, setOriginal] = useState('Y') 
   const [publish, setPublish] = useState('N') 
-  const [source, setSource] = useState('') 
-  const [ISBN, setISBN] = useState('') 
-  const [QRCBN, setQRCBN] = useState('') 
-  const [timeMarker, setTimeMarker] = useState('') 
+  const [source, setSource] = useState('-') 
+  const [ISBN, setISBN] = useState('-') 
+  const [QRCBN, setQRCBN] = useState('-') 
+  const [timeMarker, setTimeMarker] = useState('-') 
   const [genre, setGenre] = useState('') 
   const [selectedImage, setSelectedImage] = useState(''); 
   const [editorData, setEditorData] = useState('');
-
+  const [loading, setLoading] = useState('');
 
   const { slug } = useParams()
+  const router = useRouter()
+  const auth = store.getState().Auth?.auth
+  const bookDetail = store.getState().Data?.book
 
   useEffect(() => {
+    if(!bookDetail) router.push(`/profile/${slug}`)
+
     const images = [Upload1, Upload2, Upload3, Upload4, Upload5];
     const randomImage = images[Math.floor(Math.random() * images.length)];
     setSelectedImage(randomImage);
@@ -45,20 +52,79 @@ const Page = () => {
     setEditorData(data);
   };
 
-  const [error, setError] = useState('')
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top",
-    timer: 3000,
-    showConfirmButton: false,
-  });
+  const handleCreatePoetry = async () => {
+    if (!title || !editorData || !original) {
+      setError(true);
+      Swal.fire({
+        icon: 'warning',
+        title: 'All fields are required!',
+        timer: 2000,
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+      });
+      return;
+    }
 
-  if (error !== "") {
-    Toast.fire({
-        icon: "error",
-        title: error ? error : "Email atau password salah",
-    });
+    try {
+      setLoading(true)
+      const data = {
+        title,
+        content: editorData,
+        author: auth?.penName,
+        cover: bookDetail?.cover,
+        genre,
+        originalWork: original,
+        source,
+        publish,
+        typeNumberBook: code,
+        numberBook: code === 'ISBN' ? ISBN : QRCBN,
+        timeMarker,
+      }
+        
+      const response = await url_endpoint?.createPoetry(auth?.user_id, bookDetail?.book_id, data)
+      console.log('response poetry:', response)
+      if(response.data?.status === 200) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        Toast.fire({
+          customClass: {
+            popup: 'my-toast'
+          },  
+          icon: "success",
+          title: "Successfully created poetry",
+        });
+            
+      setTimeout(() => {
+        router.push(`/profile/${slug}`)
+      }, 1000)
+
+      setLoading(false)
+    } else {
+        setLoading(false)
+    }
+    } catch (error) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+        Toast.fire({
+          customClass: {
+            popup: 'my-toast'
+          },  
+          icon: "error",
+          title: error,
+        });
+      setLoading(false)
+    }
   }
+
   
   return (
     <section className='w-screen h-screen overflow-x-hidden flex'>
@@ -106,45 +172,8 @@ const Page = () => {
 
           <br />
 
-          <div className='w-full flex mt-4 mb-3 flex-col min-h-[60px]'>
-            <label className='mb-3 text-[16px]'>– Synopsis</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
-              <textarea 
-                type='text' 
-                name='synopsis' 
-                rows={6}
-                value={synopsis} 
-                placeholder='Enter Your Synopsis...' 
-                onChange={(e) => setSynopsis(e.target.value)} 
-                className='w-full h-full py-5 outline-0' 
-              />
-            </div>
-          </div>
-
-          <br />
-
           <div className='w-full flex mt-1 mb-3 flex-col min-h-[60px]'>
             <label className='mb-3 text-[16px]'>– Genre</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
-              <select className='w-full h-full py-5 outline-0' value={genre} onChange={(e) => setGenre(e.target.value)}>
-                <option value={'Personal Reflection'}>Personal Reflection</option>
-                <option value={'Relationships'}>Relationships</option>
-                <option value={'Motivational'}>Motivational</option>
-                <option value={'Celebration'}>Celebration</option>
-                <option value={'Romantic'}>Romantic</option>
-                <option value={'Mystery'}>Mystery</option>
-                <option value={'Sadness'}>Sadness</option>
-                <option value={'Nature'}>Nature</option>
-                <option value={'Life'}>Life</option>
-                <option value={'other'}>Other</option>
-              </select>
-            </div>
-          </div>
-
-          <br />
-
-          <div className='w-full flex mt-1 mb-3 flex-col min-h-[60px]'>
-            <label className='mb-3 text-[16px]'>– Digital Book Category</label>
             <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <select className='w-full h-full py-5 outline-0' value={genre} onChange={(e) => setGenre(e.target.value)}>
                 <option value={'Personal Reflection'}>Personal Reflection</option>
@@ -278,11 +307,12 @@ const Page = () => {
           <br />
 
           {/* Button */}
-          <div className='relative flex items-center bg-blue-400 py-2 text-white rounded-md w-max h-[70%] px-10 cursor-pointer active:scale-[0.98] hover:brightness-[90%] duration-100'>
+          <div onClick={() => {loading ? null() : handleCreatePoetry()}} className={`relative flex items-center ${loading ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-blue-400 text-white cursor-pointer"} py-2 rounded-md w-max h-[40px] px-5 active:scale-[0.98] hover:brightness-[90%] duration-100`}>
+              {loading && <Spinner />}
               <p>
-                Upload Poetry
+                Create Book
               </p>
-            </div>
+          </div>
         </form>
       </div>
     </section>

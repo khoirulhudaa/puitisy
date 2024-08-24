@@ -62,7 +62,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className='fixed z-[999999] top-0 left-0 px-10 w-screen flex items-center h-[54px] bg-white justify-between shadow-md'>
+    <nav className='fixed z-[999999] top-0 left-0 px-10 w-screen flex items-center h-[54px] bg-white justify-between shadow-sm'>
         
         <div className='w-1/2 h-full flex items-center'>
             <h2 className='flex items-center text-[24px] font-bold'>
@@ -77,14 +77,14 @@ const Navbar = () => {
                 <a href='#read'>
                     <li className='ml-8'>Read Poetry</li>
                 </a>
-                <a href='#what'>
+                <a href='#desc'>
                     <li className='ml-8'>What Puitisy</li>
                 </a>
-                <a href='#create'>
+                <a href={`/profile/${auth?.penName}`}>
                     <li className='ml-8'>Create Puitisy</li>
                 </a>
-                <a href='#contact'>
-                    <li className='ml-8'>Contact</li>
+                <a href='#tips'>
+                    <li className='ml-8'>Tips & tricks</li>
                 </a>
             </ul>
             

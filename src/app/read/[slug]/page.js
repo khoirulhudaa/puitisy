@@ -1,23 +1,51 @@
 "use client";
 
+import convertToWord from '@/app/helpers/convertToWord';
+import ArrowLeft from '@/public/arrow-left.png';
+import AudioActive from '@/public/audioActive.png';
+import AudioInActive from '@/public/audioInActive.png';
+import Copy from '@/public/copy.png';
 import Flower1 from '@/public/flower1.png';
+import Ig from '@/public/ig.png';
+import Pen from '@/public/penWhite.png';
 import Share from '@/public/share.png';
+import Speed from '@/public/speed.png';
+import Tele from '@/public/tele.png';
 import Download from '@/public/unduh.png';
 import User from '@/public/user.png';
 import Wa from '@/public/wa.png';
-import Tele from '@/public/tele.png';
-import Copy from '@/public/copy.png';
-import Ig from '@/public/ig.png';
+import store from '@/redux/Store';
+import { url_endpoint } from '@/services/Actions';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Page = () => {
-  // const [data, setData] = useState(null);
-  const [showShare, setShowShare] = useState(true);
+  const [showShare, setShowShare] = useState(false);
+  const [active, setActive] = useState(false);
+  const [customDocx, setCustomDocx] = useState(false);
+  const [author, setAuthor] = useState(null);
+  const [book, setBook] = useState(null);
+  const [paper, setPaper] = useState(null);
+  const [fontSize, setFontSize] = useState(null);
+  const [font, setFont] = useState(null);
 
   const { slug } = useParams()
+  const poetry = store.getState().Data?.poetry
+  const auth = store.getState().Auth?.auth
+
+  useEffect(() => {
+    const getAuthor = async () => {
+      const response = await url_endpoint?.getAccountById(poetry?.authorId)
+      const responseBook = await url_endpoint?.getBookById(poetry?.book_id)
+      setAuthor(response?.data?.data)
+      setBook(responseBook?.data?.data)
+    }
+
+    getAuthor()
+  }, [])
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''; // Mendapatkan URL saat ini
 
@@ -78,69 +106,204 @@ const Page = () => {
     )
   }
 
+  const PaperSizes = [
+    { value: 'A4', label: 'A4', width: 11906, height: 16838, margin: 720 },
+    { value: 'A5', label: 'A5', width: 8272, height: 11692, margin: 720 },
+  ];
+  
+  // Mengonversi objek FontSizes menjadi array
+  const FontSizes = [
+    { value: 10, label: '10-px', size: 20 },
+    { value: 11, label: '11-px', size: 22 },
+    { value: 12, label: '12-px', size: 24 },
+  ];
+  
+  // Mengonversi objek Fonts menjadi array
+  const Fonts = [
+    { value: 'Times New Roman', label: 'Times New Roman' },
+    { value: 'Arial', label: 'Arial' },
+    { value: 'Calibri', label: 'Calibri' },
+  ];
+
+  const MenuCustomDocx = () => {
+    return (
+      <div className={`fixed top-[35%] rounded-md lg:left-[31%] flex flex-col justify-center w-max h-max px-4 py-5 bg-white shadow-lg border border-slate-400 z-[33333333]`}>
+        <div className='w-max flex items-center'>
+          {
+            FontSizes?.map((data, index) => (
+              <div key={index} onClick={() => setFontSize(data?.value)} className={`w-max px-2 flex items-center justify-center h-[40px] rounded-md ${fontSize === data?.value ? 'bg-blue-500 text-white' : 'bg-white text-black'} border border-slate-300 mx-2 mb-3 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100`}>
+                <p>{data?.label}</p>
+              </div>
+            ))
+          }
+        </div>
+        <hr className='mb-3 border border-slate-200' />
+        <div className='w-max flex items-center'>
+          {
+            PaperSizes?.map((data, index) => (
+              <div key={index} onClick={() => setPaper(data?.value)} className={`w-[40px] flex items-center justify-center h-[40px] rounded-md ${paper === data?.value ? 'bg-blue-500 text-white' : 'bg-white text-black'} border border-slate-300 mx-2 mb-3 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100`}>
+                <p>{data?.label}</p>
+              </div>
+            ))
+          }
+        </div>
+        <hr className='mb-3 border border-slate-200' />
+        <div className='w-max flex items-center'>
+          {
+            Fonts?.map((data, index) => (
+              <div key={index} onClick={() => setFont(data?.value)} className={`w-max px-3 flex items-center justify-center h-[40px] rounded-md ${font === data?.value ? 'bg-blue-500 text-white' : 'bg-white text-black'} border border-slate-300 mx-2 mb-3 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100`}>
+                <p>{data?.label}</p>
+              </div>
+            ))
+          }
+        </div>
+        <hr className='mb-3 border border-slate-200' />
+        
+        <div className='relative w-full flex z-[33] items-center justify-between'>
+          <div onClick={() => setCustomDocx(false)} className='w-[48%] h-max text-red-500 bg-white border border-red-500 rounded-md cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 flex items-center justify-center px-4 py-2 mt-2'>
+            Cancel
+          </div>
+          <div onClick={() => convertToWord(poetry?.content, poetry?.title, author?.penName, fontSize, paper, font)} className='w-[48%] h-max text-white bg-blue-500 rounded-md cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 flex items-center justify-center px-4 py-2 mt-2'>
+            Download
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const readTextAloud = (html) => {
+    try {
+      // Menggunakan DOMParser untuk mengonversi HTML menjadi teks biasa
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const paragraphs = Array.from(doc.querySelectorAll('p')).map(p => p.innerText.trim()).filter(text => text.length > 0);
+  
+      if (paragraphs.length === 0) {
+        return;
+      }
+  
+      const synth = window.speechSynthesis;
+  
+      // Hentikan semua pembacaan aktif
+      if (synth.speaking) {
+        synth.cancel(); // Hentikan pembacaan aktif
+      }
+  
+      console.log('Mulai membaca teks...');
+      setActive(true); // Menandai bahwa pembacaan aktif
+  
+      const readParagraph = (index) => {
+        if (index >= paragraphs.length) {
+          setActive(false); // Menandai bahwa pembacaan selesai
+          return;
+        }
+  
+        const utterance = new SpeechSynthesisUtterance(paragraphs[index]);
+        utterance.lang = 'id-ID'; // Set bahasa jika diperlukan
+  
+        utterance.onstart = () => {
+          console.log(index + 1);
+        };
+  
+        utterance.onend = () => {
+          console.log(index + 1);
+          setTimeout(() => {
+            readParagraph(index + 1); // Lanjutkan ke bagian berikutnya
+          }, 1000); // Penundaan 1 detik
+        };
+  
+        utterance.onerror = (event) => {
+          console.error('Kesalahan saat membaca teks bagian', index + 1, ':', event);
+          // Lanjutkan ke bagian berikutnya meskipun ada kesalahan
+          readParagraph(index + 1);
+        };
+  
+        // Mulai pembacaan
+        synth.speak(utterance);
+      };
+  
+      // Mulai membaca paragraf pertama
+      readParagraph(0);
+    } catch (error) {
+      console.error('Kesalahan dalam proses:', error);
+      setActive(false); // Menandai bahwa pembacaan selesai meskipun ada kesalahan
+    }
+  };
+
+  const skipReading = () => {
+    const synth = window.speechSynthesis;
+    synth.cancel();
+  };
+
+  const stopReading = () => {
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.pause(); // Hentikan semua pembacaan suara
+      setActive(false); // Menandai bahwa pembacaan telah dihentikan
+    }
+  };
+
   return (
     <section className='w-screen flex min-h-[80vh]'>
 
-      <div className='w-full p-10'>
+      <div className='w-full p-10 pt-10 pb-2'>
         <div className='w-full flex items-center'>
           <div className='w-1/2'>
-            <h2 className='font-[800] text-[30px]'>– {decodeURIComponent(slug)}</h2>
+            <div className='flex items-center w-max'>
+              <Link href={`/profile/${author?.penName}`}>
+                <div className='w-[30px] h-[30px] rounded-full flex mr-4 items-center justify-center p-1 bg-white border border-slate-400 shadow-sm text-white cursor-pointer active:scale-[0.97] hover:brightness-90'>
+                  <Image src={ArrowLeft} alt='arrow-left-icon' width={14} height={14} />
+                </div>
+              </Link>
+              <h2 className='font-[800] text-[30px]'>– {decodeURIComponent(slug)}</h2>
+            </div>
             <i>
-              <small className='text-[17px]'>Oleh: Muhammad Khoirulhuda</small>
+              <small className='text-[17px]'>Oleh: {author?.penName}</small>
             </i>
           </div>
-          <p className='ml-auto text-[18px]'>Cirebon, 17 Agutua 2024</p>
+          <p className='ml-auto text-[18px]'>{poetry?.timeMarker ?? '-'}</p>
         </div>
 
-        <hr className='my-5 border border-slate-300' />
+        <hr className='my-5 border-[1px] border-slate-200' />
 
         <div className='flex w-full h-max'>
-          <div className='relative flex w-[70%] min-h-full border-r border-r-slate-300'>
-
+          <div className='relative flex w-[70%] min-h-screen border-r border-r-slate-300'>
 
             <div className='absolute right-[-120px] top-[10%] overflow-hidden'>
               <Image src={Flower1} alt="flower" width={400} height={400} className='opacity-15' />
             </div>
 
+            <div className='w-[70px] mr-4 mt-[7px] h-max pb-4 border-b border-b-slate-300'>
+              <div className={`w-[40px] h-[40px] border ${active ? 'border-white bg-blue-500 text-white' : 'border-slate-300'} rounded-md flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90`} onClick={() => {!active ? readTextAloud(poetry?.content) : null()}}>
+                <Image src={active ? AudioActive : AudioInActive} alt='audio-icon' width={20} height={20} />
+              </div>
+              {
+                active && (
+                  <>
+                    <div onClick={() => skipReading()} className={`w-[40px] h-[40px] mt-5 border border-slate-400 text-white rounded-md flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90`}>
+                      <Image src={Speed} alt='audio-icon' width={20} height={20} />
+                    </div>
+                    <div onClick={() => stopReading()} className={`w-[40px] h-[40px] mt-5 border border-red-500 text-white rounded-md flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90`}>
+                      <div className='w-[40%] h-[40%] rounded-full bg-red-500'></div>
+                    </div>
+                  </>
+                )
+              }
+            </div>
+
             <div className='w-[90%] border-r border-r-slate-300'>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod. 
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
-              <p className='mb-10'>
-                loreElit ipsum reprehenderit ad commodo aute exercitation 
-                dolore occaecat ullamco veniam eiusmod.
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: poetry?.content }} />
+              <i>
+                <p className='text-slate-400 mt-12 text-[16px]'>– {poetry?.timeMarker}</p>
+              </i>
             </div>
 
             <div className='relative h-full flex flex-col items-center z-[]44 w-[10%]'>
-              <div className='top-0 rounded-full flex mb-5 items-center justify-center p-3 bg-blue-400 text-white w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90'>
+              <div onClick={() => setCustomDocx(!customDocx)} className='relative top-0 rounded-full flex mb-5 items-center justify-center p-3 bg-blue-400 text-white w-[40px] h-[40px] cursor-pointer'>
                 <Image src={Download} alt='download-icon' width={20} height={20} />
               </div>
+              {
+                customDocx && <MenuCustomDocx />
+              }
 
               <div className='w-[70%] h-[1px] border-b border-b-slate-300 mb-5' />
 
@@ -152,40 +315,56 @@ const Page = () => {
               </div>
               
               <div className='w-[70%] h-[1px] border-b border-b-slate-300 my-5' />
-
-              <div className='top-0 rounded-full flex items-center justify-center p-3 bg-indigo-400 text-white w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90'>
-                <Image src={User} alt='user-icon' width={20} height={20} className='relative' />
-              </div>
+              
+              {
+                poetry?.authorId === auth?.user_id ? (
+                  <Link href={`/edit-poetry/${poetry?.poetry_id}/${poetry?.title}`}>
+                    <div className='top-0 rounded-full flex items-center justify-center p-3 bg-indigo-400 text-white w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90'>
+                      <Image src={Pen} alt='user-icon' width={20} height={20} className='relative' />
+                    </div>
+                  </Link>
+                ):
+                <Link href={`/profile/${author?.penName}?author=invite`}>
+                  <div className='top-0 rounded-full flex items-center justify-center p-3 bg-indigo-400 text-white w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90'>
+                    <Image src={User} alt='user-icon' width={20} height={20} className='relative' />
+                  </div>
+                </Link>
+              }
             </div>
 
           </div>
-          <div className='relative w-[30%] h-[90vh] pl-6 pr-3'>
+          <div className='relative w-[30%] h-max pb-10 pl-6 pr-3'>
             <label className='font-bold'>– Bionarasi:</label>
-            <p className='text-[14px] leading-loose'>Penulisnya adalah seorang mahasiswa usia 21 tahun, menempuh pendidikan teknik informatika angkata 2021 di Cirebon.</p>
+            <p className='text-[14px] leading-loose'>{author?.bionarasi}</p>
+            
+            <hr className='my-6 border border-slate-300' />
+
+            <label className='font-bold'>– Genre:</label>
+            <p className='text-[14px] leading-loose'>{poetry?.genre}</p>
             
             <hr className='my-6 border border-slate-300' />
 
             <label className='font-bold'>– Sinopsis:</label>
-            <p className='text-[14px] leading-loose'>Puisi ini berkisah tentang kehidupan seorang pelajar yang tengah giat belajar untuk meraih impiannya sedari kecil.</p>
+            <p className='text-[14px] leading-loose'>{book?.synopsis}</p>
             
             <hr className='my-6 border border-slate-300' />
 
             <label className='font-bold'>– Book/Link Reference:</label>
-            <p className='text-[14px] leading-loose'>Buku Rinai Bunga Puitis</p>
+            <p className='text-[14px] leading-loose'>{poetry?.source}</p>
             
             <hr className='my-6 border border-slate-300' />
 
-            <label className='font-bold'>– ISBN/QRCBN:</label>
-            <p className='text-[14px] leading-loose'>23723-3283-273-328</p>
+            <label className='font-bold'>– {poetry?.typeNumberBook === 'ISBN' ? 'ISBN' : poetry?.typeNumberBook === 'QRCBN' ? 'QRCBN' : '-'}</label>
+            <p className='text-[14px] leading-loose'>{poetry?.numberBook ? poetry?.numberBook : '-' }</p>
             
             <hr className='my-6 border border-slate-300' />
 
             <label className='font-bold'>– Instagram:</label>
-            <p className='text-[14px] leading-loose'>@_mk.h19</p>
+            <p className='text-[14px] leading-loose'>{author?.instagram}</p>
           </div>
         </div>
 
-        <hr className='mt-5 border border-slate-300' />
+        <hr className='mt-5 border w-full border-slate-300' />
 
       </div>
 

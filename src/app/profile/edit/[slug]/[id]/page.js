@@ -67,7 +67,7 @@ const Page = () => {
         formData.append('avatar', file);
       }
 
-      const response = await url_endpoint.updateAccountById(decodeURIComponent(id), formData)
+      const response = await url_endpoint.updateAccountById(id, formData)
 
       if(response?.status === 200) {
         const Toast = Swal.mixin({

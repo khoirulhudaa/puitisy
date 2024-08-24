@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	book: {},
+	poetry: {},
 };
 
 const dataSlice = createSlice({
@@ -14,8 +15,14 @@ const dataSlice = createSlice({
 				...action.payload,
 			};
 		},
+		getPoetryDetail: (state, action) => {
+			state.poetry = {
+				...state.poetry,
+				...action.payload,
+			};
+		},
 	},
 });
 
-export const { getBookDetail } = dataSlice.actions;
+export const { getBookDetail, getPoetryDetail } = dataSlice.actions;
 export default dataSlice.reducer;

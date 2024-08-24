@@ -149,7 +149,7 @@ const Page = () => {
         {/* Flower */}
         <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-3%] top-[-10%] transform -rotate-90 z-[1] opacity-30' />
 
-        <h2 className='text-[56px] relative ml-[-10px]'>TimE foR booK!</h2>
+        <h2 className='text-[56px] relative ml-[-10px]'>Update foR booK!</h2>
 
         <form className='w-[90%] mt-2'>
           <label className='text-[16px]'>– Title book</label>
