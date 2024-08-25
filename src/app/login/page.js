@@ -81,23 +81,23 @@ const Page = () => {
   }
   
   return (
-    <section className='w-screen h-screen overflow-x-hidden flex'>
-       <div className='w-[30%] h-screen overflow-hidden'>
+    <section className='w-screen h-screen overflow-x-hidden lg:flex'>
+       <div className='hidden lg:flex  w-[30%] h-screen overflow-hidden'>
         <Image src={BgLogin} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div className='relative w-[70%] h-screen overflow-hidden p-12'>
+      <div className='relative w-scren lg:w-[70%] h-screen overflow-hidden p-8 lg:p-12'>
 
         {/* Flower */}
-        <Image src={Flower1} alt='flower' width={370} height={370} className='fixed right-[-4%] bottom-[-10%] z-[1] opacity-100' />
-        <Image src={Flower1} alt='flower' width={250} height={250} className='fixed right-[-4%] top-[-10%] z-[1] opacity-100' />
+        <Image src={Flower1} alt='flower' width={370} height={370} className='hidden lg:flex absolute lg:fixed right-[-10%] lg:scale-1 scale-[0.6] lg:right-[-4%] bottom-[-10%] z-[1] opacity-10 lg:opacity-100' />
+        <Image src={Flower1} alt='flower' width={250} height={250} className='fixed right-[-4%] top-[-10%] z-[1] opacity-10 lg:opacity-100' />
 
-        <h2 className='text-[56px] relative ml-[-10px]'>Yeay, Come Back!</h2>
+        <h2 className='text-[30px] lg:text-[56px] relative ml-[-10px]'>Yeay, Come Back!</h2>
         <small className='text-[16px] text-slate-400'>Enter your email and password correctly</small>
 
-        <form className='w-[90%] mt-12'>
+        <form className='w-full lg:w-[90%] mt-12 z-[3333]'>
           <div className='w-full flex flex-col h-[60px] mb-5'>
             <label className='mb-3 text-[16px]'>Email</label>
-            <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='email' 
                 name='email' 
@@ -113,7 +113,7 @@ const Page = () => {
 
           <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
             <label className='mb-3 text-[16px]'>Password</label>
-            <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type={show ? 'text' : 'password'} 
                 name='email' 

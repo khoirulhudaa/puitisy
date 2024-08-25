@@ -123,19 +123,19 @@ const Home = () => {
       <Hero />
 
       {/* Content */}
-      <div className="w-full h-max py-4 px-12 box-border">
+      <div className="w-full h-max py-4 lg:px-12 box-border">
         <div className="w-full mt-3">
-          <div className="flex items-center w-full">
-            <p className="font-bold text-[20px] mr-3 my-3 flex w-max">Author :</p>
+          <div className="lg:flex items-center w-full">
+            <p className="font-bold hidden text-[20px] mr-3 my-3 lg:flex w-max">Author :</p>
             {/* Search Author */}
-            <div className="w-[25%] flex py-3 items-center justify-between px-3 gap-3 rounded-lg border-[0.4px] border-[#BFBFBF]">
+            <div className="w-[25%] hidden lg:flex py-3 items-center justify-between px-3 gap-3 rounded-lg border-[0.4px] border-[#BFBFBF]">
               <Icons type="find" className="flex items-center justify-center w-3 h-3" />
               <input type="text" name='searchAuthor' value={searchAuthor} onChange={e => setSearchAuthor(e.target.value)} placeholder="Search by author poetry" className="h-full w-[220px] text-slate-600 outline-0 border-0 text-[15px]" />
               <Icons type="close" className="flex items-center justify-center w-3 h-3 cursor-pointer active:scale-[0.98]" onClick={() => setSearchAuthor('')} />
             </div>
             {/* Search Title */}
-            <p className="font-bold text-[20px] mr-1 ml-5 my-3 flex w-max">Title :</p>
-            <div className="w-[25%] ml-3 flex py-3 items-center justify-between px-3 gap-3 rounded-lg border-[0.4px] border-[#BFBFBF]">
+            <p className="font-bold text-[20px] mr-1 ml-3 lg:ml-5 my-3 flex w-max">Title :</p>
+            <div className="w-[90%] lg:w-[25%] ml-3 flex py-3 items-center justify-between px-3 gap-3 rounded-lg border-[0.4px] border-[#BFBFBF]">
               <Icons type="find" className="flex items-center justify-center w-3 h-3" />
               <input type="text" name='title' value={searchTitle} onChange={e => setSearchTitle(e.target.value)} placeholder="Search by title poetry" className="h-full w-[220px] text-slate-600 outline-0 border-0 text-[15px]" />
               <Icons type="close" className="flex items-center justify-center w-3 h-3 cursor-pointer active:scale-[0.98]" onClick={() => setSearchTitle('')} />
@@ -143,9 +143,9 @@ const Home = () => {
           </div>
 
           {/* List Genre */}
-          <div className="w-full flex items-center mt-4">
-            <p className="font-bold pb-4 text-[20px] mr-3 my-3 flex items-center w-[82px]">Genre :</p>
-            <div id="swap-genre" className="w-full pr-12 overflow-x-auto flex items-center">
+          <div className="w-full lg:flex items-center mt-4">
+            <p className="font-bold lg:ml-0 ml-3 pb-1 lg:pb-4 text-[20px] mr-3 my-3 flex items-center w-[82px]">Genre :</p>
+            <div id="swap-genre" className="w-full lg:ml-0 ml-3 pr-12 overflow-x-auto flex items-center">
               <div className="flex items-center w-max pb-4">
                 {genres.map((genre, index) => (
                   <div
@@ -165,7 +165,7 @@ const Home = () => {
           <div id="read" className={`w-full flex flex-wrap ${filteredPoetry.length > 3 ? 'justify-between' : 'justify-start'}`}>
             {Array.isArray(currentPoems) && currentPoems.length > 0 ? (
               currentPoems.map((poem, index) => (
-                <div key={index} className={`${filteredPoetry.length > 3 ? 'mr-0' : 'mr-5'} w-[23%] mb-5 h-[360px] rounded-[12px] bg-white border border-slate-300 shadow-sm cursor-pointer duration-200 overflow-hidden`}>
+                <div key={index} className={`${filteredPoetry.length > 3 ? 'mr-0' : 'lg:mr-5 lg:ml-0 ml-4 mr-4'} w-full lg:w-[23%] mb-5 h-[360px] rounded-[12px] bg-white border border-slate-300 shadow-sm cursor-pointer duration-200 overflow-hidden`}>
                   <div className="relative w-full h-[60%] overflow-hidden object-cover">
                     <div className="absolute top-4 right-4 px-5 py-1 bg-slate-200 text-slate-800 shadow-md border border-white flex items-center justify-center rounded-full">
                       Poem
@@ -195,8 +195,8 @@ const Home = () => {
 
           {/* Pagination Controls */}
           <div className="flex justify-between items-center mt-4">
-            <div className="flex items-center">
-              <div>Show </div>
+            <div className="flex ml-0 items-center">
+              <div className="lg:flex hidden">Show </div>
               <select
                 value={poemsPerPage}
                 onChange={handlePoemsPerPageChange}
@@ -208,9 +208,9 @@ const Home = () => {
                 <option value={20}>20</option>
                 <option value={30}>30</option>
               </select>
-              <div> /page</div>
+              <div className="lg:flex hidden"> /page</div>
             </div>
-            <div>
+            <div className="mt-0 ml-0 mr-3 lg:mr-0">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
@@ -232,39 +232,39 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="relative overflow-hidden w-[100vw] mx-auto py-20 h-max text-center flex flex-col items-center justify-center px-12 box-border">
+      <div className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-6 lg:py-20 h-max text-left lg:text-center flex flex-col lg:items-center justify-center px-3 lg:px-12 box-border">
          <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[0%] bottom-[0%] z-[1] opacity-15' />
-          <h2 className="text-[40px] leading-loose w-[70vw] z-[333333]">"Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul."</h2>
+          <h2 className="text-[26px] lg:text-[40px] leading-normal lg:leading-loose w-[92vw] lg:w-[70vw] z-[333333]">"Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul."</h2>
             <p className="relative before:absolute before:bottom-0 before:left-0 before:w-[90%] mt-3 text-[18px] before:h-[2px] before:bg-slate-500">Imam Al-Ghazali</p>
       </div>
 
       <hr className="w-full my-8 border border-slate-300" />
       
-      <div id="desc" className="relative overflow-hidden w-[100vw] mx-auto py-20 h-max flex flex-col items-end px-12 box-border">
+      <div id="desc" className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-2 lg:py-20 h-max flex flex-col lg:items-end px-3 lg:px-12 box-border">
          <Image src={Flower1} alt='flower' width={370} height={370} className='absolute left-[-4%] bottom-[0%] z-[1] opacity-15' />
-          <h2 className="relative w-max text-[36px] mb-6">– Is that poetry</h2>
-          <p className="w-[80%] leading-loose">Poetry is a form of literary expression that uses structured, rhythmic language, often with emotional undertones, to convey ideas, feelings, or experiences. In poetry, every word is carefully chosen to create deeper meaning and aesthetic effects, often employing styles such as metaphor, simile, alliteration, and symbolism. –</p>
+          <h2 className="relative w-max text-[30px] lg:text-[36px] mb-6">– Is that poetry</h2>
+          <p className="w-full lg:w-[80%] leading-loose">Poetry is a form of literary expression that uses structured, rhythmic language, often with emotional undertones, to convey ideas, feelings, or experiences. In poetry, every word is carefully chosen to create deeper meaning and aesthetic effects, often employing styles such as metaphor, simile, alliteration, and symbolism. –</p>
       </div>
 
       <hr className="w-full my-8 border border-slate-300" />
 
-      <div id="tips" className="relative overflow-hidden w-[100vw] mx-auto pb-12 pt-12 h-max px-12 box-border">
+      <div id="tips" className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto pb-4 lg:pb-12 pt-2 lg:pt-12 h-max px-3 lg:px-12 box-border">
          <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[-4%] top-[0%] z-[1] opacity-15' />
-          <h2 className="relative w-max text-[36px] mb-6">– Go further!</h2>
+          <h2 className="relative w-max text-[30px] lg:text-[36px] mb-6">– Go further!</h2>
           <div className="w-full flex justify-between items-center flex-wrap">
-              <div className="w-[48.5%] mb-10 border border-slate-300 rounded-md px-6 py-8">
+              <div className="w-full lg:w-[48.5%] mb-5 lg:mb-10 border border-slate-300 rounded-md px-6 py-8">
                 <h3 className="font-bold mb-3">Exploring Poetic Styles and Techniques</h3>
                 <p className="leading-loose w-[90%] text-[14px] text-slate-600">Discuss various styles of poetry, such as free verse, sonnets, haikus, and other classical forms. Explain advanced techniques like enjambment, anaphora, complex metaphors, and sound play.</p>
               </div>
-              <div className="w-[48.5%] mb-10 border border-slate-300 rounded-md px-6 py-8">
+              <div className="w-full lg:w-[48.5%] mb-5 lg:mb-10 border border-slate-300 rounded-md px-6 py-8">
                 <h3 className="font-bold mb-3">Developing Your Personal Poetic</h3>
                 <p className="leading-loose w-[90%] text-[14px] text-slate-600">Find your unique poetic voice by experimenting with different themes and styles. Focus on authenticity to create poetry that reflects your true self and stands out in the literary world.</p>
               </div>
-              <div className="w-[48.5%] border border-slate-300 rounded-md px-6 py-8">
+              <div className="w-full lg:w-[48.5%] border lg:mb-0 mb-5 border-slate-300 rounded-md px-6 py-8">
                 <h3 className="font-bold mb-3">Editing and Refining Poetry</h3>
                 <p className="leading-loose w-[90%] text-[14px] text-slate-600">Edit your poetry to improve clarity and emotional depth. Maintain rhythm and refine diction to ensure each line contributes effectively while preserving the poem's essence.</p>
               </div>
-              <div className="w-[48.5%] border border-slate-300 rounded-md px-6 py-8">
+              <div className="w-full lg:w-[48.5%] border border-slate-300 rounded-md px-6 py-8">
                 <h3 className="font-bold mb-3">Published and Winning Awards </h3>
                 <p className="leading-loose w-[90%] text-[14px] text-slate-600">Learn how to publish your poetry and enter contests. Build a professional reputation and explore strategies for advancing your career as a poet through networking and literary engagement.</p>
               </div>

@@ -57,23 +57,23 @@ const Page = () => {
   }
 
   return (
-    <section className='w-screen h-screen overflow-hidden flex'>
-      <div className='w-[30%] h-screen overflow-hidden'>
+    <section className='w-screen h-screen overflow-hidden lg:flex'>
+      <div className='hidden lg:flex w-[30%] h-screen overflow-hidden'>
         <Image src={BgLogin} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div id='form' className='relative w-[70%] h-screen overflow-y-auto p-12'>
+      <div id='form' className='relative w-screen lg:w-[70%] h-screen overflow-y-auto p-8 lg:p-12'>
 
         {/* Flower */}
-        <Image src={Flower1} alt='flower' width={370} height={370} className='fixed right-[-4%] bottom-[-10%] z-[1] opacity-100' />
-        <Image src={Flower1} alt='flower' width={250} height={250} className='fixed right-[-4%] top-[-10%] z-[1] opacity-100' />
+        <Image src={Flower1} alt='flower' width={370} height={370} className='hidden lg:flex absolute lg:fixed right-[-20%] lg:right-[-4%] lg:scale-1 scale-[0.5] bottom-[-10%] z-[1] opacity-10 lg:opacity-100' />
+        <Image src={Flower1} alt='flower' width={250} height={250} className='fixed right-[-10%] lg:right-[-4%] top-[-10%] z-[1] opacity-10 lg:opacity-100' />
 
-        <h2 className='text-[56px] relative ml-[-10px]'>Welcome in Puitisy!</h2>
+        <h2 className='text-[30px] lg:text-[56px] relative ml-[-10px]'>Welcome in Puitisy!</h2>
 
-        <form className='w-[90%] mt-4'>
+        <form className='w-full lg:w-[90%] mt-4'>
 
           <div className='w-full flex flex-col h-[60px] mb-5'>
             <label className='mb-3 text-[16px]'>Pen Name</label>
-            <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='text' 
                 name='penName' 
@@ -89,7 +89,7 @@ const Page = () => {
 
           <div className='w-full flex flex-col h-[60px] mt-4 mb-5'>
             <label className='mb-3 text-[16px]'>Email</label>
-            <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='email' 
                 name='email' 
@@ -105,7 +105,7 @@ const Page = () => {
 
           <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
             <label className='mb-3 text-[16px]'>Password</label>
-            <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type={show ? 'text' : 'password'} 
                 name='email' 
