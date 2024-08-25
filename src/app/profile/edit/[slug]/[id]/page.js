@@ -27,7 +27,6 @@ const Page = () => {
   
   const auth = store.getState().Auth?.auth
   const { slug, id } = useParams() 
-  const savedPathname = `/profile/${auth?.penName}`;
   const router = useRouter()
 
   useEffect(() => {
@@ -109,8 +108,8 @@ const Page = () => {
   return (
     <section className='w-screen min-h-[90vh] overflow-hidden'>
         <div className='relative overflow-hidden flex items-center justify-center w-full h-[45vh] bg-slate-900'>
-            <h1 className='absolute w-max z-[1] opacity-80 text-[54px] text-center text-white left-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
-            <h1 className='absolute w-max z-[1] opacity-80 text-[54px] text-center text-white right-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
+            <h1 className='absolute w-max z-[1] opacity-80 text-[40px] lg:flex hidden lg:text-[54px] text-center text-white left-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
+            <h1 className='absolute w-full lg:w-max z-[1] text-[60px] lg:text-[54px] text-center opacity-40 lg:opacity-80 text-white translate-x-[0%] lg:translate-x-0 transform lg:transform-none right-[0%] lg:right-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
             <div className='relative z-[333] flex items-center justify-center w-[150px] h-[150px] p-1 rounded-full overflow-hidden bg-white shadow-md border border-white'>
                
                {/* Pen */}
@@ -145,22 +144,22 @@ const Page = () => {
             </div>
         </div>
 
-        <div className='relative w-full px-10 py-5'>
+        <div className='relative w-full px-4 lg:px-10 py-5'>
             {/* Flower */}
             <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-15' />
 
-            <div className='relative w-full z-[33] flex justify-between items-center'>
+            <div className='relative w-full z-[33] lg:flex justify-between items-center'>
                 <div className='w-max flex items-center text-blue-600'>
-                  <Link href={savedPathname}>
-                      <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1' />
+                  <Link href={`/profile/${slug}`}>
+                      <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1 border border-blue-500 rounded-full lg:p-1 p-2 w-[40px] h-[40px]' />
                   </Link>
-                  <p className='relative top-[-2px] ml-1'>profile <span className='mx-1'>/</span> edit <span className='mx-1'>/</span> {slug}</p>
+                  <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> edit <span className='mx-1'>/</span> {slug}</p>
               </div>
 
-              <div className='w-max flex items-center'>
-                  <div className='w-full flex h-max items-center'>
+              <div className='w-full z-[444] lg:mt-0 mt-5 lg:w-max lg:flex items-center'>
+                  <div className='w-full lg:flex h-max items-center'>
                       <label className='text-[18px] mr-4'>Year Birth</label>
-                      <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                      <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                       <input 
                           type='text' 
                           name='year' 
@@ -171,9 +170,9 @@ const Page = () => {
                       />
                       </div>
                   </div>
-                  <div className='w-full flex h-max items-center'>
+                  <div className='w-full lg:flex h-max items-center'>
                       <label className='text-[18px] mr-4'>Country</label>
-                      <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                      <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                       <input 
                           type='text' 
                           name='location' 
@@ -191,7 +190,7 @@ const Page = () => {
 
             <div className='w-full flex flex-col h-max mb-5'>
                 <label className='mb-6 text-[18px]'>Pen Name</label>
-                <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                 <input 
                     type='text' 
                     name='name' 
@@ -204,7 +203,7 @@ const Page = () => {
             </div>
             <div className='w-full flex flex-col h-max mb-5'>
                 <label className='mb-6 text-[18px]'>Bionarasi</label>
-                <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                 <input 
                     type='text' 
                     name='bionarasi' 
@@ -217,7 +216,7 @@ const Page = () => {
             </div>
             <div className='w-full flex flex-col h-max mb-5'>
                 <label className='mb-6 text-[18px]'>Instagram</label>
-                <div className='flex w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                 <input 
                     type='text' 
                     name='instagram' 

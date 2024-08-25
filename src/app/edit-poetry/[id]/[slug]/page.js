@@ -40,7 +40,7 @@ const Page = () => {
   const router = useRouter()
   const dispatch = useDispatch()
   const auth = store.getState().Auth?.auth
-  const boook = store.getState().Data?.book
+  const book = store.getState().Data?.book
   const poetryDetail = store.getState().Data?.poetry
 
   useEffect(() => {
@@ -149,8 +149,8 @@ const handleEditorChange = (event, editor) => {
 
   
   return (
-    <section className='w-screen h-screen overflow-x-hidden flex'>
-       <div className='relative w-[30%] h-screen overflow-hidden'>
+    <section className='w-screen h-screen overflow-x-hidden lg:flex lg:pb-0 pb-6'>
+       <div className='relative w-[30%] lg:flex hidden h-screen overflow-hidden'>
         <div className='absolute z-40 left-7 top-12 flex items-center'>
           <Link href={`/read/${slug}`}>
             <div className='w-[45px] h-[45px] rounded-full ml-[-13px] flex items-center justify-center bg-white shadow-md p-1 border border-slate-300 cursor-pointer active:scale-[0.98] hover:brightness-90'>
@@ -161,29 +161,29 @@ const handleEditorChange = (event, editor) => {
         </div>
         <Image src={selectedImage} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div className='relative w-[70%] h-screen overflow-y-auto overflow-x-hidden py-6 px-12'>
+      <div className='relative w-full lg:w-[70%] h-screen overflow-y-auto overflow-x-hidden py-6 px-3 lg:px-12'>
 
         {/* Flower */}
-        <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-3%] top-[-10%] transform -rotate-90 z-[1] opacity-30' />
+        <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-14%] lg:right-[-3%] top-[-10%] lg:z-[3] z-[-1] transform -rotate-90 opacity-10 lg:opacity-30' />
 
-        <h2 className='text-[56px] relative ml-[-10px]'>Update foR poeM!</h2>
+        <h2 className='text-[30px] lg:text-[56px] lg:mb-0 mb-7 relative ml-1 lg:ml-[-10px]'>Update foR poeM!</h2>
 
-        <form className='w-[90%] mt-2'>
+        <form className='w-full lg:w-[90%] mt-2 z-[3333]'>
           <label className='text-[16px]'>– Title poetry</label>
-          <div className='flex mt-3 w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+          <div className='flex mt-3 w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
             <input 
               type='text' 
               name='title' 
               value={title} 
               placeholder='Enter Your Title...' 
               onChange={(e) => setTitle(e.target.value)} 
-              className='w-full h-full py-5 outline-0' 
+              className='w-full h-full py-5 outline-0 bg-white' 
             />
           </div>
 
           <br />
 
-          <div className='w-[75%] flex flex-col mt-3 h-max'>
+          <div className='w-full lg:w-[75%] flex flex-col mt-3 h-max'>
             <label className='mb-3 text-[16px]'>– content of the poem</label>
             <CKEditor
               editor={ClassicEditor}
@@ -196,8 +196,8 @@ const handleEditorChange = (event, editor) => {
 
           <div className='w-full flex mt-1 mb-3 flex-col min-h-[60px]'>
             <label className='mb-3 text-[16px]'>– Genre</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
-              <select className='w-full h-full py-5 outline-0' value={genre} onChange={(e) => setGenre(e.target.value)}>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+              <select className='w-full h-full py-5 outline-0 bg-white' value={genre} onChange={(e) => setGenre(e.target.value)}>
                 <option value={'Personal Reflection'}>Personal Reflection</option>
                 <option value={'Relationships'}>Relationships</option>
                 <option value={'Motivational'}>Motivational</option>
@@ -237,7 +237,7 @@ const handleEditorChange = (event, editor) => {
 
           <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
             <label className={`mb-3 text-[16px] ${original === 'N' ? '' : 'text-slate-400'}`}>– Source (Book Name or Link)</label>
-            <div className={`flex w-[75%] ${original === 'N' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
+            <div className={`flex w-full lg:w-[75%] ${original === 'N' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
               <input 
                 type='text' 
                 name='source' 
@@ -297,7 +297,7 @@ const handleEditorChange = (event, editor) => {
 
           <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
             <label className={`mb-3 text-[16px] ${publish === 'Y' ? '' : 'text-slate-400'}`}>{publish && code === 'ISBN' ? '– ISBN' : publish && code === 'QRCBN' ? '– QRCBN' : '– ISBN/QRCBN number'}</label>
-            <div className={`flex w-[75%] ${publish === 'Y' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
+            <div className={`flex w-full lg:w-[75%] ${publish === 'Y' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
               <input 
                 type='text' 
                 name={publish === 'Y'&& code === 'ISBN' ? ISBN : publish === 'Y'&& code === 'QRCBN' ? QRCBN  : ''} 
@@ -314,14 +314,14 @@ const handleEditorChange = (event, editor) => {
 
           <div className='w-full flex mb-12 flex-col h-[60px]'>
             <label className='mb-3 text-[16px]'>– Time marker</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='text' 
                 name='TimeMarker' 
                 value={timeMarker} 
                 placeholder='Cirebon, 19 March 2024' 
                 onChange={(e) => setTimeMarker(e.target.value)} 
-                className='w-full h-full py-5 outline-0' 
+                className='w-full h-full py-5 outline-0 bg-white' 
               />
             </div>
           </div>

@@ -89,17 +89,17 @@ const Page = () => {
 
   const MenuShare = () => {
     return (
-      <div className='absolute bottom-[-110%] rounded-md lg:left-[-200%] flex flex-col justify-center w-max h-max px-4 py-1 bg-white shadow-lg border border-slate-400 z-[3]'>
-        <div onClick={() => shareToWhatsApp()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
+      <div className='absolute top-[-180%] lg:bottom-[-110%] rounded-md lg:left-[-200%] left-[-100%] flex lg:flex-col justify-center w-max h-max px-4 py-1 bg-white shadow-lg border border-slate-400 z-[3]'>
+        <div onClick={() => shareToWhatsApp()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 lg:mx-0 mx-3 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
           <Image src={Wa} alt='icon-sosmed' width={16} height={16} />
         </div>
-        <div onClick={() => shareToInstagram()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
+        <div onClick={() => shareToInstagram()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 lg:mx-0 mx-3 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
           <Image src={Ig} alt='icon-sosmed' width={16} height={16} />
         </div>
-        <div onClick={() => shareToTelegram()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
+        <div onClick={() => shareToTelegram()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 lg:mx-0 mx-3 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
           <Image src={Tele} alt='icon-sosmed' width={16} height={16} />
         </div>
-        <div onClick={() => copyToClipboard()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
+        <div onClick={() => copyToClipboard()} className='w-[32px] flex items-center justify-center h-[32px] rounded-full bg-white border border-slate-300 lg:mx-0 mx-3 my-2 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100'>
           <Image src={Copy} alt='icon-sosmed' width={16} height={16} />
         </div>
       </div>
@@ -121,13 +121,12 @@ const Page = () => {
   // Mengonversi objek Fonts menjadi array
   const Fonts = [
     { value: 'Times New Roman', label: 'Times New Roman' },
-    { value: 'Arial', label: 'Arial' },
     { value: 'Calibri', label: 'Calibri' },
   ];
 
   const MenuCustomDocx = () => {
     return (
-      <div className={`fixed top-[35%] rounded-md lg:left-[31%] flex flex-col justify-center w-max h-max px-4 py-5 bg-white shadow-lg border border-slate-400 z-[33333333]`}>
+      <div className={`fixed top-[35%] rounded-md left-[50%] transform lg:transform-none lg:translate-x-0 translate-x-[-50%] lg:left-[38%] flex flex-col justify-center w-[92vw] lg:w-max h-max px-4 py-5 bg-white shadow-lg border border-slate-400 z-[33333333]`}>
         <div className='w-max flex items-center'>
           {
             FontSizes?.map((data, index) => (
@@ -245,34 +244,34 @@ const Page = () => {
   return (
     <section className='w-screen flex min-h-[80vh]'>
 
-      <div className='w-full p-10 pt-10 pb-2'>
-        <div className='w-full flex items-center'>
-          <div className='w-1/2'>
-            <div className='flex items-center w-max'>
-              <Link href={`/profile/${author?.penName}`}>
+      <div className='w-full p-4 lg:p-10 pt-8 lg:pt-10 pb-2'>
+        <div className='w-full lg:flex items-center'>
+          <div className='w-full lg:w-1/2'>
+            <div className='lg:flex items-center w-full lg:w-max'>
+              <Link href={`/profile/${author?.penName}`} className='mr-2 w-[10%]'>
                 <div className='w-[30px] h-[30px] rounded-full flex mr-4 items-center justify-center p-1 bg-white border border-slate-400 shadow-sm text-white cursor-pointer active:scale-[0.97] hover:brightness-90'>
                   <Image src={ArrowLeft} alt='arrow-left-icon' width={14} height={14} />
                 </div>
               </Link>
-              <h2 className='font-[800] text-[30px]'>– {decodeURIComponent(slug)}</h2>
+              <h2 className='relative font-[800] w-[85%] text-[24px] lg:text-[30px] flex items-center'><span className='mr-2 lg:flex hidden'>–</span> <span className='w-[100%] overflow-hidden whitespace-nowrap text-ellipsis'>{decodeURIComponent(poetry?.title)}</span></h2>
             </div>
             <i>
-              <small className='text-[17px]'>Oleh: {author?.penName}</small>
+              <small className='text-[15px] lg:text-[17px]'>Oleh: {author?.penName}</small>
             </i>
           </div>
-          <p className='ml-auto text-[18px]'>{poetry?.timeMarker ?? '-'}</p>
+          <p className='ml-auto text-[15px] lg:text-[18px]'>{poetry?.timeMarker ?? '-'}</p>
         </div>
 
         <hr className='my-5 border-[1px] border-slate-200' />
 
-        <div className='flex w-full h-max'>
-          <div className='relative flex w-[70%] min-h-screen border-r border-r-slate-300'>
+        <div className='lg:flex w-full h-max'>
+          <div className='relative lg:flex w-full lg:w-[70%] lg:mb-0 mb-10 lg:border-b-0 lg:min-h-screen lg:border-r lg:border-r-slate-300'>
 
             <div className='absolute right-[-120px] top-[10%] overflow-hidden'>
-              <Image src={Flower1} alt="flower" width={400} height={400} className='opacity-15' />
+              <Image src={Flower1} alt="flower" width={400} height={400} className='opacity-5 lg:opacity-15' />
             </div>
 
-            <div className='w-[70px] mr-4 mt-[7px] h-max pb-4 border-b border-b-slate-300'>
+            <div className='w-full lg:w-[70px] mr-4 mt-[7px] h-max pb-4 lg:border-b border-b-slate-300'>
               <div className={`w-[40px] h-[40px] border ${active ? 'border-white bg-blue-500 text-white' : 'border-slate-300'} rounded-md flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90`} onClick={() => {!active ? readTextAloud(poetry?.content) : null()}}>
                 <Image src={active ? AudioActive : AudioInActive} alt='audio-icon' width={20} height={20} />
               </div>
@@ -290,31 +289,31 @@ const Page = () => {
               }
             </div>
 
-            <div className='w-[90%] border-r border-r-slate-300'>
+            <div className='w-[90%] lg:border-r border-r-slate-300'>
               <div dangerouslySetInnerHTML={{ __html: poetry?.content }} />
               <i>
-                <p className='text-slate-400 mt-12 text-[16px]'>– {poetry?.timeMarker}</p>
+                <p className='text-slate-400 mt-12 text-[16px] flex items-center'><span className='mr-2 lg:flex hidden'>–</span> {poetry?.timeMarker}</p>
               </i>
             </div>
 
-            <div className='relative h-full flex flex-col items-center z-[]44 w-[10%]'>
-              <div onClick={() => setCustomDocx(!customDocx)} className='relative top-0 rounded-full flex mb-5 items-center justify-center p-3 bg-blue-400 text-white w-[40px] h-[40px] cursor-pointer'>
+            <div className='relative h-full flex lg:flex-col items-center z-[44] w-max px-0 lg:mt-0 mt-6 lg:w-[10%]'>
+              <div onClick={() => setCustomDocx(!customDocx)} className='relative top-0 rounded-full flex lg:mb-5 lg:mr-0 mr-3 items-center justify-center lg:p-3 bg-blue-400 text-white w-[40px] h-[40px] cursor-pointer'>
                 <Image src={Download} alt='download-icon' width={20} height={20} />
               </div>
               {
                 customDocx && <MenuCustomDocx />
               }
 
-              <div className='w-[70%] h-[1px] border-b border-b-slate-300 mb-5' />
+              <div className='w-[70%] lg:flex hidden h-[1px] border-b border-b-slate-300 mb-5' />
 
-              <div onClick={() => setShowShare(!showShare)} className='relative top-0 rounded-full flex items-center justify-center p-3 bg-gray-400 text-white w-[40px] h-[40px] cursor-pointer active:scale-[0.98]'>
+              <div onClick={() => setShowShare(!showShare)} className='relative top-0 rounded-full lg:mr-0 mr-3 flex items-center justify-center p-3 bg-gray-400 text-white w-[40px] h-[40px] cursor-pointer active:scale-[0.98]'>
                 <Image src={Share} alt='share-icon' width={20} height={20} className='relative left-[-1.2px]' />
                 {
                   showShare && <MenuShare />
                 }
               </div>
-              
-              <div className='w-[70%] h-[1px] border-b border-b-slate-300 my-5' />
+
+              <div className='w-[70%] lg:flex hidden h-[1px] border-b border-b-slate-300 my-5' />
               
               {
                 poetry?.authorId === auth?.user_id ? (
@@ -333,33 +332,36 @@ const Page = () => {
             </div>
 
           </div>
-          <div className='relative w-[30%] h-max pb-10 pl-6 pr-3'>
-            <label className='font-bold'>– Bionarasi:</label>
+
+          <hr className='mb-6 border-[1px] lg:hidden border-slate-200' />
+
+          <div className='relative w-full lg:w-[30%] h-max pb-2 lg:pb-10 lg:pl-6 pr-3'>
+            <label className='font-bold flex items-center'><span className='mr-2 lg:flex hidden'>–</span> Bionarasi:</label>
             <p className='text-[14px] leading-loose'>{author?.bionarasi}</p>
             
             <hr className='my-6 border border-slate-300' />
 
-            <label className='font-bold'>– Genre:</label>
+            <label className='font-bold flex items-center'><span className='mr-2 lg:flex hidden'>–</span> Genre:</label>
             <p className='text-[14px] leading-loose'>{poetry?.genre}</p>
             
             <hr className='my-6 border border-slate-300' />
 
-            <label className='font-bold'>– Sinopsis:</label>
+            <label className='font-bold flex items-center'><span className='mr-2 lg:flex hidden'>–</span> Sinopsis:</label>
             <p className='text-[14px] leading-loose'>{book?.synopsis}</p>
             
             <hr className='my-6 border border-slate-300' />
 
-            <label className='font-bold'>– Book/Link Reference:</label>
+            <label className='font-bold flex items-center'><span className='mr-2 lg:flex hidden'>–</span> Book/Link Reference:</label>
             <p className='text-[14px] leading-loose'>{poetry?.source}</p>
             
             <hr className='my-6 border border-slate-300' />
 
-            <label className='font-bold'>– {poetry?.typeNumberBook === 'ISBN' ? 'ISBN' : poetry?.typeNumberBook === 'QRCBN' ? 'QRCBN' : '-'}</label>
+            <label className='font-bold flex items-center'><span className='mr-2 lg:flex hidden'>–</span> {poetry?.typeNumberBook === 'ISBN' ? 'ISBN' : poetry?.typeNumberBook === 'QRCBN' ? 'QRCBN' : '-'}</label>
             <p className='text-[14px] leading-loose'>{poetry?.numberBook ? poetry?.numberBook : '-' }</p>
             
             <hr className='my-6 border border-slate-300' />
 
-            <label className='font-bold'>– Instagram:</label>
+            <label className='font-bold flex items-center'><span className='mr-2 lg:flex hidden'>–</span> Instagram:</label>
             <p className='text-[14px] leading-loose'>{author?.instagram}</p>
           </div>
         </div>

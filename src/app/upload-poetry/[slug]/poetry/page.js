@@ -128,7 +128,7 @@ const Page = () => {
   
   return (
     <section className='w-screen h-screen overflow-x-hidden flex'>
-       <div className='relative w-[30%] h-screen overflow-hidden'>
+       <div className='relative lg:flex hidden w-[30%] h-screen overflow-hidden'>
         <div className='absolute z-40 left-7 top-12 flex items-center'>
           <Link href={`/profile/${slug}`}>
             <div className='w-[45px] h-[45px] rounded-full ml-[-13px] flex items-center justify-center bg-white shadow-md p-1 border border-slate-300 cursor-pointer active:scale-[0.98] hover:brightness-90'>
@@ -139,16 +139,16 @@ const Page = () => {
         </div>
         <Image src={selectedImage} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div className='relative w-[70%] h-screen overflow-y-auto overflow-x-hidden py-6 px-12'>
+      <div className='relative w-full lg:w-[70%] h-screen overflow-y-auto overflow-x-hidden py-6 px-4 lg:px-12'>
 
         {/* Flower */}
-        <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-3%] top-[-10%] transform -rotate-90 z-[1] opacity-30' />
+        <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-3%] top-[-10%] transform -rotate-90 z-[-1] lg:z-[1] opacity-15 lg:opacity-30' />
 
-        <h2 className='text-[56px] relative ml-[-10px]'>TimE foR poeM!</h2>
+        <h2 className='text-[34px] lg:text-[56px] lg:mb-0 mb-7 relative lg:ml-[-10px]'>TimE foR poeM!</h2>
 
-        <form className='w-[90%] mt-2'>
+        <form className='w-full lg:w-[90%] z-[4433] mt-2'>
           <label className='text-[16px]'>– Title poetry</label>
-          <div className='flex mt-3 w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+          <div className='flex mt-3 w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
             <input 
               type='text' 
               name='title' 
@@ -161,7 +161,7 @@ const Page = () => {
 
           <br />
 
-          <div className='w-[75%] flex flex-col mt-3 h-max'>
+          <div className='w-full lg:w-[75%] flex flex-col mt-3 h-max'>
             <label className='mb-3 text-[16px]'>– content of the poem</label>
             <CKEditor
               editor={ClassicEditor}
@@ -174,7 +174,7 @@ const Page = () => {
 
           <div className='w-full flex mt-1 mb-3 flex-col min-h-[60px]'>
             <label className='mb-3 text-[16px]'>– Genre</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <select className='w-full h-full py-5 outline-0' value={genre} onChange={(e) => setGenre(e.target.value)}>
                 <option value={'Personal Reflection'}>Personal Reflection</option>
                 <option value={'Relationships'}>Relationships</option>
@@ -215,7 +215,7 @@ const Page = () => {
 
           <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
             <label className={`mb-3 text-[16px] ${original === 'N' ? '' : 'text-slate-400'}`}>– Source (Book Name or Link)</label>
-            <div className={`flex w-[75%] ${original === 'N' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
+            <div className={`flex w-full lg:w-[75%] ${original === 'N' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
               <input 
                 type='text' 
                 name='source' 
@@ -275,7 +275,7 @@ const Page = () => {
 
           <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
             <label className={`mb-3 text-[16px] ${publish === 'Y' ? '' : 'text-slate-400'}`}>{publish && code === 'ISBN' ? '– ISBN' : publish && code === 'QRCBN' ? '– QRCBN' : '– ISBN/QRCBN number'}</label>
-            <div className={`flex w-[75%] ${publish === 'Y' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
+            <div className={`flex w-full lg:w-[75%] ${publish === 'Y' ? '' : 'bg-slate-200'} border border-slate-300 rounded-lg px-5 items-center`}>
               <input 
                 type='text' 
                 name={code === 'ISBN' ? ISBN : code === 'QRCBN' ? QRCBN  : ''} 
@@ -292,7 +292,7 @@ const Page = () => {
 
           <div className='w-full flex mb-12 flex-col h-[60px]'>
             <label className='mb-3 text-[16px]'>– Time marker</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='text' 
                 name='TimeMarker' 

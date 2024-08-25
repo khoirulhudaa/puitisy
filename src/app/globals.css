@@ -76,3 +76,9 @@ body::-webkit-scrollbar {
 .ask-title {
     font-size: 1.6rem;
 }
+
+@media screen and (max-width: 750px) {
+    .ask-popup {
+        width: 90vw;
+    }
+}

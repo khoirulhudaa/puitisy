@@ -10,7 +10,7 @@ const Hero = () => {
   const auth = store.getState().Auth?.auth
 
   return (
-    <section className='relative overflow-hidden w-screen h-[70vh] lg:h-[84vh] bg-slate-900 text-center flex flex-col items-center justify-center'>
+    <section className='relative overflow-hidden w-screen min-h-[60vh] lg:h-[84vh] bg-slate-900 text-center flex flex-col items-center justify-center'>
         {/* Background */}
         <Image src={Lines} alt='flower' width={2000} height={1400} className='absolute left-[0%] top-0 z-[1] opacity-10' />
         
@@ -22,7 +22,7 @@ const Hero = () => {
             <h1 className='text-[40px] lg:text-[72px] font-normal relative text-transparent bg-clip-text bg-gradient-to-t from-slate-400 to-white'>Puitisy: Crafting Poetry</h1>
             <p className='text-white text-[16px] lg:text-[24px] w-[85%] lg:w-[60%] mt-6'>– A digital space where words and poetic art unite, offering a platform for writers and readers to connect and create.</p>
             <Link href={`/profile/${auth?.penName}`}>
-              <div className='rounded-md bg-white flex items-center justify-center cursor-pointer mt-10 mb-10 hover:bg-slate-200 active:scale-[0.98] duration-100 px-8 py-3'>
+              <div className='rounded-md bg-white flex items-center justify-center cursor-pointer mt-10 mb-2 lg:mb-10 hover:bg-slate-200 active:scale-[0.98] duration-100 px-8 py-3'>
                   <p>Create Poetry </p>
               </div>
             </Link>

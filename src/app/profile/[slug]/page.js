@@ -117,7 +117,7 @@ const Page = () => {
         {/* Side */}
         <div className={`fixed flex items-center ${showSide ? 'bottom-0' : 'bottom-[-100%]'} duration-200 left-0 w-[100vw] border-t border-t-slate-400 h-[24vh] overflow-y-auto bg-white z-[444444] shadow-md pt-6 pb-2 px-5`}>
           
-          <div className='w-[7%]'>
+          <div className='w-max lg:w-[7%]'>
             <div onClick={() => setShowSide(false)} className='relative ml-2 mr-6 bottom-1 w-[40px] h-[40px] rounded-md flex items-center justify-center bg-white border border-red-500 cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 shadow-md p-1'>
               <Image src={Times} alt='times-icon' width={20} height={20} />
             </div>
@@ -127,12 +127,12 @@ const Page = () => {
             {
               poems && poems?.length > 0 ? (
                 poems?.map((data, index) => (
-                  <div onClick={() => handleReadPoetry(data)} key={index} className='w-[260px] mr-4 bg-white flex items-center justify-between h-[100px] rounded-[10px] py-2 px-3 border border-slate-400 mb-3 cursor-pointer active:scale-[0.98] duration-100 hover:brightness-90'>
-                    <div className='w-[98%]'>
-                      <h2 className='w-full font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>{data?.title}</h2>
-                      <p className='w-full overflow-hidden whitespace-nowrap text-ellipsis'>Genre: {data?.genre}</p>
-                      <i className='w-full flex text-right items-center justify-end'>
-                        <p className='w-full ml-auto overflow-hidden whitespace-nowrap text-ellipsis text-[12px] text-slate-400'>{data?.timeMarker}</p>
+                  <div onClick={() => handleReadPoetry(data)} key={index} className='w-max lg:w-[260px] mr-4 bg-white flex items-center justify-between h-[100px] rounded-[10px] py-2 px-6 lg:px-3 border border-slate-400 mb-3 cursor-pointer active:scale-[0.98] duration-100 hover:brightness-90'>
+                    <div className='w-max lg:w-[98%]'>
+                      <h2 className='w-full font-bold text-[17px] lg:overflow-hidden lg:whitespace-nowrap lg:text-ellipsis'>{data?.title}</h2>
+                      <p className='w-full lg:overflow-hidden lg:whitespace-nowrap lg:text-ellipsis'>Genre: {data?.genre}</p>
+                      <i className='w-full flex lg:text-right items-center justify-end'>
+                        <p className='w-full ml-auto lg:overflow-hidden lg:whitespace-nowrap lg:text-ellipsis text-[12px] text-slate-400'>{data?.timeMarker}</p>
                       </i>
                     </div>
                   </div>
@@ -144,9 +144,9 @@ const Page = () => {
         </div>
         
         <div className='relative overflow-hidden flex items-center justify-center w-full h-[45vh] bg-slate-900'>
-            <h1 className='absolute w-max z-[1] opacity-30 text-[54px] text-center text-slate-100 left-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
-            <h1 className='absolute w-full z-[1] opacity-30 text-[104px] text-center text-slate-100 flex items-center justify-center transform translate-x-[0%] top-[40%]'>P.O.E.T.R.Y</h1>
-            <h1 className='absolute w-max z-[1] opacity-30 text-[54px] text-center text-slate-100 right-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
+            <h1 className='absolute w-max z-[1] opacity-30 text-[54px] lg:flex hidden text-center text-slate-100 left-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
+            <h1 className='absolute w-full z-[1] opacity-30 text-[70px] lg:text-[104px] text-center text-slate-100 flex items-center justify-center transform translate-x-[0%] top-[40%]'>P.O.E.T.R.Y</h1>
+            <h1 className='absolute w-max z-[1] opacity-30 text-[54px] lg:flex hidden text-center text-slate-100 right-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
             <div className='relative z-[333] w-[180px] h-[180px] p-1 rounded-full overflow-hidden bg-white shadow-md border-[6px] border-white'>
                 <Image src={data && data.avatar === 'default' ? Default : data?.avatar} alt='photo-profile-me' width={200} height={200} className='w-full h-full hover:scale-[1.2] duration-300 hover:grayscale-[50%] object-cover rounded-full' />
             </div>
@@ -162,7 +162,7 @@ const Page = () => {
             }
         </div>
 
-        <div className='relative w-full px-10 py-5'>
+        <div className='relative w-full px-4 lg:px-10 py-5'>
             {/* Flower */}
             <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-15' />
 
@@ -171,7 +171,7 @@ const Page = () => {
                   <Link href={'/'}>
                       <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1' />
                   </Link>
-                  <p className='relative top-[-2px] ml-1'>profile <span className='mx-1'>/</span> {decodeURIComponent(slug)}</p>
+                  <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> {decodeURIComponent(slug)}</p>
               </div>
 
               <p className='flex w-max'>{data && data?.year !== '-' ? data?.year : ''} ({data && data?.year !== '-' ? `${calculateDifference(data?.year)} - ${calculateDifference(data?.year) + 1} tahun` : 'Usia belum diketahui' }), <b className='ml-1'>{data?.country}</b></p>
@@ -179,19 +179,19 @@ const Page = () => {
 
             <hr className='my-6 border border-slate-300' />
 
-            <h2 className='font-bold flex items-center text-[36px]'>– {data?.penName ?? ''} - <Image src={data && data?.gender === 'M' ? Male : data && data?.gender === 'F' ? Female : Netral} alt='arrow-left' width={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} height={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} className='ml-3' /></h2>
-            <p className='w-[70%] text-slate-600 leading-loose'>– {data?.bionarasi === null || data?.bionarasi === '-' ? 'Bionarration has not been added to this account' : data?.bionarasi}</p>
+            <h2 className='font-bold lg:flex items-center text-[26px] lg:text-[36px]'>– {data?.penName ?? ''} - <Image src={data && data?.gender === 'M' ? Male : data && data?.gender === 'F' ? Female : Netral} alt='arrow-left' width={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} height={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} className='ml-3 lg:flex hidden' /></h2>
+            <p className='w-[90%] lg:w-[70%] text-slate-600 leading-loose'>– {data?.bionarasi === null || data?.bionarasi === '-' ? 'Bionarration has not been added to this account' : data?.bionarasi}</p>
             {/* <p className='w-[70%] text-slate-600 leading-loose'>– Mahasiswa semester 8 angkatan tahun 2021, asal dari prodi teknik informatika di STMIK IKMI KOTA CIREBON. Pria yang hobi berpuisi dan nogding serta olahrga futsal dan renang.</p> */}
             
             <hr className='my-6 border border-slate-300' />
 
             {/* List poetry */}
             <div className='w-full flex items-center justify-between'>
-              <h2 className='font-bold text-[36px]'>– His digital Book</h2>
+              <h2 className='font-bold text-[26px] lg:text-[36px]'>– His digital Book</h2>
               {
                  (searchParams.get('author') !== "invite" && auth?.user_id === poetry?.authorId) && (
                   <div className='flex items-center'>
-                    <p className='mr-3 text-[17px]'>Create book</p>
+                    <p className='mr-3 lg:flex hidden text-[17px]'>Create book</p>
                     <Link href={`/upload-book/${slug}/book/`}>
                       <div className='relative w-[40px] h-[40px] rounded-full border border-slate-600 bg-white shadow-md z-40 flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90'>
                         <Image src={Plus} alt="plus" width={20} height={20} />
@@ -204,7 +204,7 @@ const Page = () => {
             <div className={`w-full mt-8 flex flex-wrap ${Array.isArray(books) && books.length > 3 ? 'justify-between' : 'justify-start'}`}>
               {
                  (searchParams.get('author') !== "invite" && auth?.user_id === poetry?.authorId) && (
-                  <Link href={`/upload-book/${slug}/book`} className={`w-[23%] mb-5 flex ${books.length > 3 ? 'mr-0' : 'mr-3'} items-center justify-center flex-col h-[350px] rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer active:scale-[0.98] duration-200 overflow-hidden`}>
+                  <Link href={`/upload-book/${slug}/book`} className={`w-full lg:w-[23%] mb-5 flex ${books.length > 3 ? 'mr-0' : 'mr-3'} items-center justify-center flex-col h-[350px] rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer active:scale-[0.98] duration-200 overflow-hidden`}>
                     <div className='w-full flex items-center justify-center flex-col'>
                       <div className='relative w-[60px] h-[60px] rounded-full border border-slate-600 bg-white shadow-md z-40 flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90'>
                           <Image src={Plus} alt="plus" width={20} height={20} />
@@ -217,7 +217,7 @@ const Page = () => {
               {
                 Array.isArray(books) && books.length > 0 ? (
                   books.map((_, index) => (
-                  <div className={`w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'mx-3'}`}>
+                  <div className={`w-full lg:w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'mx-3'}`}>
                     <div key={index} className="w-full mb-5 h-full rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer duration-200 overflow-hidden">
                     
                       <div className="relative w-full h-[60%] overflow-hidden object-cover">

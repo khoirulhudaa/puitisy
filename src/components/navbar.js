@@ -72,7 +72,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='fixed z-[999999] top-0 left-0 px-4 lg:px-10 w-screen flex items-center h-[54px] bg-white justify-between shadow-sm'>
+    <nav className='fixed z-[999999] top-0 left-0 px-4 lg:px-10 w-screen flex items-center h-[60px] lg:h-[54px] bg-white justify-between shadow-sm'>
         
         <div className='w-1/2 h-full flex items-center'>
             <h2 className='flex items-center text-[24px] font-bold'>
@@ -84,7 +84,7 @@ const Navbar = () => {
         </div>
 
         {/* Humberger button menu */}
-        <div onClick={() => setShowSidebar(!showSidebar)} className={`relative w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 border ${showSidebar ? 'border-slate-500 bg-red-500' : 'border-slate-300 bg-white'} rounded-md p-2 flex flex-col items-center justify-between`}>
+        <div onClick={() => setShowSidebar(!showSidebar)} className={`relative w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 border ${showSidebar ? 'border-slate-500 bg-red-500' : 'border-slate-300 bg-white'} rounded-md p-2 lg:hidden flex flex-col items-center justify-between`}>
           <div className={`w-full h-[2px] transition-transform duration-300 ease-in-out ${showSidebar ? 'rotate-45 translate-y-[9px] bg-white' : 'bg-slate-300'}`}></div>
           <div className={`w-full bg-slate-300 h-[2px] transition-opacity duration-300 ease-in-out ${showSidebar ? 'opacity-0' : 'opacity-100'}`}></div>
           <div className={`w-full h-[2px] transition-transform duration-300 ease-in-out ${showSidebar ? '-rotate-45 -translate-y-[12px] bg-white' : 'bg-slate-300'}`}></div>

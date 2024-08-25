@@ -132,8 +132,8 @@ const Page = () => {
   }
 
   return (
-    <section className='w-screen h-screen overflow-x-hidden flex'>
-       <div className='relative w-[30%] h-screen overflow-hidden'>
+    <section className='w-screen h-screen overflow-x-hidden lg:pb-0 pb-6 lg:flex'>
+       <div className='relative lg:flex hidden w-[30%] h-screen overflow-hidden'>
         <div className='absolute z-40 left-7 top-12 flex items-center'>
           <Link href={`/profile/${slug}`}>
             <div className='w-[45px] h-[45px] rounded-full ml-[-13px] flex items-center justify-center bg-white shadow-md p-1 border border-slate-300 cursor-pointer active:scale-[0.98] hover:brightness-90'>
@@ -144,16 +144,16 @@ const Page = () => {
         </div>
         <Image src={Upload3} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div className='relative w-[70%] h-screen overflow-y-auto overflow-x-hidden py-6 px-12'>
+      <div className='relative w-full lg:w-[70%] h-screen overflow-y-auto overflow-x-hidden py-6 px-3 lg:px-12'>
 
         {/* Flower */}
-        <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-3%] top-[-10%] transform -rotate-90 z-[1] opacity-30' />
+        <Image src={Flower1} alt='flower' width={320} height={320} className='fixed right-[-14%] lg:right-[-3%] top-[-10%] lg:z-[3] z-[-1] transform -rotate-90 opacity-10 lg:opacity-30' />
 
-        <h2 className='text-[56px] relative ml-[-10px]'>Update foR booK!</h2>
+        <h2 className='text-[30px] lg:text-[56px] lg:mb-0 mb-7 relative ml-1 lg:ml-[-10px]'>Update foR booK!</h2>
 
-        <form className='w-[90%] mt-2'>
-          <label className='text-[16px]'>– Title book</label>
-          <div className='flex mt-3 w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+        <form className='w-full lg:w-[90%] mt-2 z-[3333]'>
+          <label className='text-[16px]'>– Title poetry</label>
+          <div className='flex mt-3 w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
             <input 
               type='text' 
               name='title' 
@@ -168,7 +168,7 @@ const Page = () => {
 
           <div className='w-full flex mt-4 mb-3 flex-col min-h-[60px]'>
             <label className='mb-3 text-[16px]'>– Synopsis</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <textarea 
                 type='text' 
                 name='synopsis' 
@@ -185,7 +185,7 @@ const Page = () => {
 
           <div className='w-full flex mt-2 mb-3 flex-col min-h-[60px]'>
             <label className='mb-3 text-[16px]'>– Theme</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='text' 
                 name='theme' 
@@ -201,7 +201,7 @@ const Page = () => {
 
           <div className='w-full flex mt-2 mb-3 flex-col min-h-[60px]'>
             <label className='mb-3 text-[16px]'>– Year</label>
-            <div className='flex w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
+            <div className='flex w-full lg:w-[75%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type='text' 
                 name='year' 
