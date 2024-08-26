@@ -3,15 +3,25 @@
 import '@/app/globals.css'
 import calculateDifference from '@/app/helpers/getAge'
 import ArrowLeft from '@/public/arrow-left.png'
+import Beginner from '@/public/beginner.png'
+import Border from '@/public/border.png'
+import ChevronDown from '@/public/chevron.png'
+import ChevronUp from '@/public/chevronUp.png'
 import Default from '@/public/default.jpeg'
+import Ten from '@/public/ten.png'
 import Female from '@/public/female.png'
 import Flower1 from '@/public/flower1.png'
 import Male from '@/public/male.png'
+import Pro from '@/public/pro.png'
+import Most from '@/public/most.png'
 import Netral from '@/public/N.png'
 import Pen from '@/public/pen.png'
 import Plus from '@/public/plus.png'
+import Streak from '@/public/streak.png'
 import Times from '@/public/times.png'
 import Trash from '@/public/trash.png'
+import Veteran from '@/public/veteran.png'
+import Winner from '@/public/winner.png'
 import { authSignIn } from '@/redux/auth/AuthSlice'
 import { getBookDetail, getPoetryDetail } from '@/redux/auth/DataSlice'
 import store from '@/redux/Store'
@@ -29,7 +39,9 @@ const Page = () => {
   const [books, setBooks] = useState([])
   const [poems, setPoems] = useState([])
   const [status, setStatus] = useState(false)
+  const [mute, setMute] = useState(false)
   const [showSide, setShowSide] = useState(false)
+  const [showHero, setShowHero] = useState(false)
 
   const { slug } = useParams() 
   const dispatch = useDispatch()
@@ -143,23 +155,61 @@ const Page = () => {
           </div>
         </div>
         
-        <div className='relative overflow-hidden flex items-center justify-center w-full h-[45vh] bg-slate-900'>
-            <h1 className='absolute w-max z-[1] opacity-30 text-[54px] lg:flex hidden text-center text-slate-100 left-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
-            <h1 className='absolute w-full z-[1] opacity-30 text-[70px] lg:text-[104px] text-center text-slate-100 flex items-center justify-center transform translate-x-[0%] top-[40%]'>P.O.E.T.R.Y</h1>
-            <h1 className='absolute w-max z-[1] opacity-30 text-[54px] lg:flex hidden text-center text-slate-100 right-[5%] top-[16%]'>P.O.E.T.R.Y</h1>
-            <div className='relative z-[333] w-[180px] h-[180px] p-1 rounded-full overflow-hidden bg-white shadow-md border-[6px] border-white'>
-                <Image src={data && data.avatar === 'default' ? Default : data?.avatar} alt='photo-profile-me' width={200} height={200} className='w-full h-full hover:scale-[1.2] duration-300 hover:grayscale-[50%] object-cover rounded-full' />
+        <div className={`relative overflow-hidden lg:flex items-center justify-center w-full ${showHero ? 'h-0 duration-200 lg:h-[0vh]' : 'h-max lg:h-[45vh] duration-200'} lg:py-0 py-1 bg-slate-900`}>
+            <div className='relative lg:absolute lg:top-8 lg:mt-0 mt-10 lg:left-[10px] flex items-center justify-between w-full lg:w-max lg:scale-1 scale-[0.9]'>
+              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Beginner writer'>
+                <Image src={Beginner} alt='beginner-icon' width={20} height={20} />
+              </div>
+              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Winner of competition'>
+                <Image src={Winner} alt='beginner-icon' width={20} height={20} />
+              </div>
+              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Collector of 10 poems'>
+                <Image src={Ten} alt='beginner-icon' width={20} height={20} />
+              </div>
+              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Collector of 50 poems'>
+                <Image src={Streak} alt='beginner-icon' width={20} height={20} />
+              </div>
+              <div className='hidden lg:flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Pro writer'>
+                <Image src={Pro} alt='beginner-icon' width={20} height={20} />
+              </div>
+              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Collector of 100 poems'>
+                <Image src={Most} alt='beginner-icon' width={20} height={20} />
+              </div>
+              <div className='hidden lg:flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='This is Legend!'>
+                <Image src={Veteran} alt='beginner-icon' width={20} height={20} />
+              </div>
+            </div>
+
+
+            <h1 className='relative lg:absolute w-full z-[1] opacity-30 text-[70px] lg:text-[104px] text-center text-slate-100 hidden lg:flex items-center justify-center transform translate-x-[0%] top-[40%]'>P.O.E.T.R.Y</h1>
+            <div className='relative z-[333] w-[180px] h-[180px] mx-auto lg:my-0 my-12 rounded-full bg-white shadow-md'>
+                <Image src={data && data.avatar === 'default' ? Default : data?.avatar} alt='photo-profile-me' width={240} height={240} className='w-full bg-white h-full z-[333] duration-300 hover:grayscale-[50%] object-cover rounded-full' />
+                <Image src={Border} alt='photo-profile-me' width={500} height={500} className='absolute scale-[1.3] z-[-1] top-0 w-full h-full duration-300 object-cover rounded-full' />
             </div>
             
-            {
-              (searchParams.get('author') !== "invite" && auth?.user_id === poetry?.authorId) && (
-                <Link href={`/profile/edit/${slug}/${searchParams.get('author') === "invite" ? poetry?.authorId : auth?.user_id}`}>
-                    <div title='edit-profile' className='absolute right-8 w-[40px] p-3 h-[40px] bottom-8 bg-white shadaw-md flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
-                        <Image src={Pen} alt='icon-pen' width={20} height={20} />
-                    </div>
-                </Link>
-              )
-            }
+            <div className='absolute w-max flex items-center top-8 right-[40px]'>
+              {
+                (data?.user_id === auth?.user_id) && (
+                  <Link href={`/upload-book/${auth?.penName}/book}`}>
+                      <div title='edit-profile' className='relative w-[40px] p-3 h-[40px] bg-white shadaw-md hidden lg:flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
+                          <Image src={Plus} alt='icon-pen' width={20} height={20} />
+                      </div>
+                  </Link>
+                )
+              }
+              {
+                (data?.user_id === auth?.user_id) && (
+                  <Link href={`/profile/edit/${slug}/${searchParams.get('author') === "invite" ? poetry?.authorId : auth?.user_id}`}>
+                      <div title='edit-profile' className='relative w-[40px] p-3 h-[40px] bg-white ml-5 shadaw-md hidden lg:flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
+                          <Image src={Pen} alt='icon-pen' width={20} height={20} />
+                      </div>
+                  </Link>
+                )
+              }
+              <div onClick={() => setShowHero(!showHero)} className={`relative hidden lg:flex ml-5 cursor-pointer duration-100 hover:brightness-90 shadow-md items-center justify-center w-[40px] h-[40px] rounded-full bg-white`}>
+                <Image src={showHero ? ChevronUp : ChevronDown} alt='beginner-icon' width={18} height={18} className={`duration-200 relative ${showHero ? '-top-[1px]' : 'top-[1px]'} left-[-0.5px]`} />
+              </div>
+            </div>
         </div>
 
         <div className='relative w-full px-4 lg:px-10 py-5'>
@@ -174,12 +224,25 @@ const Page = () => {
                   <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> {decodeURIComponent(slug)}</p>
               </div>
 
-              <p className='flex w-max'>{data && data?.year !== '-' ? data?.year : ''} ({data && data?.year !== '-' ? `${calculateDifference(data?.year)} - ${calculateDifference(data?.year) + 1} tahun` : 'Usia belum diketahui' }), <b className='ml-1'>{data?.country}</b></p>
+              <div className='w-max flex items-center'> 
+                <p className='flex w-max'>{data && data?.year !== '-' ? data?.year : ''} ({data && data?.year !== '-' ? `${calculateDifference(data?.year)} - ${calculateDifference(data?.year) + 1} tahun` : 'Usia belum diketahui' }), <b className='ml-1'>{data?.country}</b></p>
+              </div>
             </div>
 
-            <hr className='my-6 border border-slate-300' />
+            <hr className='mt-6 mb-4 border border-slate-300' />
 
-            <h2 className='font-bold lg:flex items-center text-[26px] lg:text-[36px]'>– {data?.penName ?? ''} - <Image src={data && data?.gender === 'M' ? Male : data && data?.gender === 'F' ? Female : Netral} alt='arrow-left' width={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} height={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} className='ml-3 lg:flex hidden' /></h2>
+            <div className='w-full border-b pb-3 border-b-slate-400 mb-5 flex lg:hidden items-center justify-between'>
+              <Link href={`/profile/edit/${slug}/${searchParams.get('author') === "invite" ? poetry?.authorId : auth?.user_id}`}>
+                <div className={`relative lg:hidden flex cursor-pointer duration-100 hover:brightness-90 shadow-md items-center justify-center w-[40px] h-[40px] rounded-full ${mute ? 'border-red-500 border-[2px]' : 'border-slate-500 border'} bg-white`}>
+                  <Image src={Pen} alt='pen-icon' width={14} height={14} />
+                </div>
+              </Link>
+              <div onClick={() => setShowHero(!showHero)} className={`relative flex ml-5 cursor-pointer duration-100 border border-slate-500 hover:brightness-90 shadow-md items-center justify-center w-[40px] h-[40px] rounded-full bg-white`}>
+                  <Image src={showHero ? ChevronUp : ChevronDown} alt='beginner-icon' width={18} height={18} className={`duration-200 relative ${showHero ? '-top-[1px]' : 'top-[1px]'} left-[-0.5px]`} />
+                </div>
+            </div>
+
+            <h2 className='font-bold lg:flex items-center text-[26px] lg:text-[36px]'>– {data?.penName ?? ''} <span className='lg:flex hidden'>-</span> <Image src={data && data?.gender === 'M' ? Male : data && data?.gender === 'F' ? Female : Netral} alt='arrow-left' width={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} height={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} className='ml-3 lg:flex hidden' /></h2>
             <p className='w-[90%] lg:w-[70%] text-slate-600 leading-loose'>– {data?.bionarasi === null || data?.bionarasi === '-' ? 'Bionarration has not been added to this account' : data?.bionarasi}</p>
             {/* <p className='w-[70%] text-slate-600 leading-loose'>– Mahasiswa semester 8 angkatan tahun 2021, asal dari prodi teknik informatika di STMIK IKMI KOTA CIREBON. Pria yang hobi berpuisi dan nogding serta olahrga futsal dan renang.</p> */}
             
@@ -189,7 +252,7 @@ const Page = () => {
             <div className='w-full flex items-center justify-between'>
               <h2 className='font-bold text-[26px] lg:text-[36px]'>– His digital Book</h2>
               {
-                 (searchParams.get('author') !== "invite" && auth?.user_id === poetry?.authorId) && (
+                 (data?.user_id === auth?.user_id) && (
                   <div className='flex items-center'>
                     <p className='mr-3 lg:flex hidden text-[17px]'>Create book</p>
                     <Link href={`/upload-book/${slug}/book/`}>
@@ -203,8 +266,8 @@ const Page = () => {
             </div>
             <div className={`w-full mt-8 flex flex-wrap ${Array.isArray(books) && books.length > 3 ? 'justify-between' : 'justify-start'}`}>
               {
-                 (searchParams.get('author') !== "invite" && auth?.user_id === poetry?.authorId) && (
-                  <Link href={`/upload-book/${slug}/book`} className={`w-full lg:w-[23%] mb-5 flex ${books.length > 3 ? 'mr-0' : 'mr-3'} items-center justify-center flex-col h-[350px] rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer active:scale-[0.98] duration-200 overflow-hidden`}>
+                 (data?.user_id === auth?.user_id && books.length > 0) && (
+                  <Link href={`/upload-book/${slug}/book`} className={`w-full lg:w-[23%] mb-5 flex ${books.length > 3 ? 'mr-0' : 'lg:mr-3'} items-center justify-center flex-col h-[350px] rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer active:scale-[0.98] duration-200 overflow-hidden`}>
                     <div className='w-full flex items-center justify-center flex-col'>
                       <div className='relative w-[60px] h-[60px] rounded-full border border-slate-600 bg-white shadow-md z-40 flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90'>
                           <Image src={Plus} alt="plus" width={20} height={20} />
@@ -217,12 +280,12 @@ const Page = () => {
               {
                 Array.isArray(books) && books.length > 0 ? (
                   books.map((_, index) => (
-                  <div className={`w-full lg:w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'mx-3'}`}>
+                  <div className={`w-full lg:w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'lg:mx-3'}`}>
                     <div key={index} className="w-full mb-5 h-full rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer duration-200 overflow-hidden">
                     
                       <div className="relative w-full h-[60%] overflow-hidden object-cover">
                         {
-                           (searchParams.get('author') !== "invite" && auth?.user_id === poetry?.authorId) && (
+                           (data?.user_id === auth?.user_id) && (
                               <>
                                 <div onClick={() => handleDelete(_?.title, _?.book_id)} className="absolute top-4 left-4 p-1 cursor-pointer hover:brightness-90 active:scale-[0.98] duration-100 w-[34px] h-[34px] bg-slate-200 text-slate-800 border border-white flex items-center justify-center rounded-full">
                                   <Image src={Trash} alt='trash-icon' width={20} height={20} />
@@ -259,7 +322,16 @@ const Page = () => {
                   </div>
                    ))
                 ) : (
-                  <div className='w-[90vw] mx-auto lg:mx-4 h-[350px] flex justify-center items-center lg:w-[60vw] border border-slate-300 rounded-lg p-4'>
+                  <div className='w-[90vw] mx-auto lg:mx-4 h-[350px] flex-col flex justify-center items-center lg:w-[92vw] border border-slate-300 rounded-lg p-4'>
+                    {
+                      data?.user_id === auth?.user_id && (
+                        <Link href={`/upload-book/${slug}/book`}>
+                          <div className='w-[50px] h-[50px] mb-5 flex items-center justify-center p-1 cursor-pointer active:scale-[0.97] hover:brightness-90 duration-75 border border-slate-400 rounded-full'>
+                            <Image src={Plus} alt='icon-plus' width={24} height={24} />
+                          </div>
+                        </Link>
+                      )
+                    }
                     <p>No books available</p>
                   </div>
                 )

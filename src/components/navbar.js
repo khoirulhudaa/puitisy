@@ -94,7 +94,7 @@ const Navbar = () => {
         {/* Sidebar component */}
         <div className={`w-[100vw] h-screen ${showSidebar ? 'left-0 duration-300' : 'left-[-100%] duration-300'} top-0 fixed lg:hidden flex-col items-start justify-start flex z-[999999] overflow-y-auto p-4 bg-white shadow-md`}>
           
-          <div onClick={() => setShowSidebar(false)} className={`absolute right-6 w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 border border-white bg-red-500 rounded-md p-2 flex flex-col items-center justify-between`}>
+          <div onClick={() => setShowSidebar(false)} className={`absolute right-4 w-[40px] h-[40px] cursor-pointer active:scale-[0.98] hover:brightness-90 duration-100 border border-white bg-red-500 rounded-md p-2 flex flex-col items-center justify-between`}>
             <div className={`w-full h-[2px] transition-transform duration-300 ease-in-out rotate-45 translate-y-[9px] bg-white`}></div>
             <div className={`w-full h-[2px] transition-transform duration-300 ease-in-out -rotate-45 -translate-y-[12px] bg-white`}></div>
           </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import Spinner from '@/components/spinner'
 import ArrowLeft from '@/public/arrow-left.png'
 import Default from '@/public/default.jpeg'
 import Flower1 from '@/public/flower1.png'
@@ -20,6 +21,7 @@ const Page = () => {
   const [gender, setGender] = useState('M')
   const [year, setYear] = useState('')
   const [instagram, setInstagram] = useState('')
+  const [loading, setLoading] = useState(false)
   const [bionarasi, setBionarasi] = useState('')
   const [location, setLocation] = useState('')
   const [file, setFile] = useState(null);
@@ -40,7 +42,6 @@ const Page = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log('file:', file)
     setFile(file)
 
     // Mengatur preview gambar
@@ -54,6 +55,7 @@ const Page = () => {
   };
   
   const handleUpdateAccount = async () => {
+    setLoading(true)
     try {
       const formData = new FormData()
       formData.append('penName', name)
@@ -83,12 +85,12 @@ const Page = () => {
             },
             title: response?.data?.message,
         });
-
+        setLoading(false)
         router.push(`/profile/${name}`)
       }
 
     } catch (error) {
-      console.log(error)
+      setLoading(false)
       const Toast = Swal.mixin({
         toast: true,
         position: "top",
@@ -113,9 +115,9 @@ const Page = () => {
             <div className='relative z-[333] flex items-center justify-center w-[150px] h-[150px] p-1 rounded-full overflow-hidden bg-white shadow-md border border-white'>
                
                {/* Pen */}
-               <div className='absolute w-[40px] p-2 h-[40px] rounded-full'>
+               <div className='absolute w-[40px] lg:p-2 h-[40px] rounded-full'>
                     <input type='file' onChange={(e) => handleFileChange(e)} name='photo' className='w-full h-full opacity-0 cursor-pointer absolute z-[333]' />
-                    <div className='cursor-pointer active:scale-[0.98] ml-[-6px] mt-[-4px] hover:brightness-90 absolute z-[4] bg-opacity-85 flex items-center justify-center duration-100 bg-white w-[40px] p-2 h-[40px] rounded-full'>
+                    <div className='cursor-pointer active:scale-[0.98] ml-[-4px] lg:ml-[-6px] mt-[-4px] hover:brightness-90 absolute z-[4] border border-slate-500 bg-opacity-85 flex items-center justify-center duration-100 bg-white w-[50px] lg:w-[40px] p-2 h-[50px] lg:h-[40px] rounded-full'>
                         <Image src={Pen} alt='photo-profile' width={15} height={15} />
                     </div>
                </div>
@@ -139,8 +141,13 @@ const Page = () => {
               )
             }
 
-            <div onClick={() => handleUpdateAccount()} title='edit-profile' className='absolute right-8 w-[40px] p-3 h-[40px] bottom-8 bg-white shadaw-md flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
-                <Image src={Save} alt='icon-save' width={20} height={20} />
+            <div onClick={() => {loading ? null() : handleUpdateAccount()}} title='edit-profile' className={`absolute right-8 w-[40px] p-3 h-[40px] bottom-8 ${loading ? 'bg-slate-200 border-slate-500 cursor-not-allowed' : 'bg-white border-slate-300 cursor-pointer active:scale-[0.97]'} shadaw-md flex item-center justify-center rounded-full border z-[44] hover:brightness-[90%]`}>
+                {
+                  loading ? (
+                    <Spinner />
+                  ):
+                    <Image src={Save} alt='icon-save' width={20} height={20} />
+                }
             </div>
         </div>
 
@@ -149,14 +156,14 @@ const Page = () => {
             <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-15' />
 
             <div className='relative w-full z-[33] lg:flex justify-between items-center'>
-                <div className='w-max flex items-center text-blue-600'>
-                  <Link href={`/profile/${slug}`}>
-                      <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1 border border-blue-500 rounded-full lg:p-1 p-2 w-[40px] h-[40px]' />
-                  </Link>
-                  <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> edit <span className='mx-1'>/</span> {slug}</p>
+              <div className='w-max flex items-center text-blue-600'>
+                <Link href={`/profile/${slug}`}>
+                    <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1 lg:mr-3 border border-blue-500 rounded-full p-2 w-[40px] h-[40px]' />
+                </Link>
+                <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> edit <span className='mx-1'>/</span> {slug}</p>
               </div>
 
-              <div className='w-full z-[444] lg:mt-0 mt-5 lg:w-max lg:flex items-center'>
+              <div className='w-full z-[444] lg:mt-0 mt-7 lg:w-max lg:flex items-center'>
                   <div className='w-full lg:flex h-max items-center'>
                       <label className='text-[18px] mr-4'>Year Birth</label>
                       <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
