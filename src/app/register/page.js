@@ -3,14 +3,14 @@
 import Icons from '@/components/icons';
 import Flower1 from '@/public/flower1.png';
 import BgLogin from '@/public/register.jpeg';
-import { url_endpoint } from '@/services/Actions';
+import { url_endpoint } from '@/services/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import '../globals.css';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
-import { authSignOut } from '@/redux/auth/AuthSlice';
+import { authSignOut } from '@/redux/auth/authSlice';
 
 const Page = () => {
 

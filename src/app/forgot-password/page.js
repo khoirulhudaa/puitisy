@@ -2,7 +2,7 @@
 
 import Spinner from '@/components/spinner';
 import Flower1 from '@/public/flower1.png';
-import { url_endpoint } from '@/services/Actions';
+import { url_endpoint } from '@/services/actions';
 import Image from 'next/image';
 import { useState } from 'react';
 import Swal from 'sweetalert2';

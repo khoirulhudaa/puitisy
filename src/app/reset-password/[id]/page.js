@@ -3,7 +3,7 @@
 import Icons from '@/components/icons';
 import Spinner from '@/components/spinner';
 import Flower1 from '@/public/flower1.png';
-import { url_endpoint } from '@/services/Actions';
+import { url_endpoint } from '@/services/actions';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

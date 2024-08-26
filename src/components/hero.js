@@ -3,7 +3,7 @@ import React from 'react'
 import Lines from '@/public/lines.png'
 import Flower1 from '@/public/flower1.png'
 import Link from 'next/link'
-import store from '@/redux/Store'
+import store from '@/redux/store'
 
 const Hero = () => {
 

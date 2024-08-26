@@ -1,4 +1,4 @@
-import {api} from "./Axios";
+import {api} from "./axios";
 
 export const url_endpoint = {
 

@@ -5,7 +5,7 @@ const initialState = {
 	poetry: {},
 };
 
-const dataSlice = createSlice({
+const DataSlice = createSlice({
 	name: "data",
 	initialState,
 	reducers: {
@@ -24,5 +24,5 @@ const dataSlice = createSlice({
 	},
 });
 
-export const { getBookDetail, getPoetryDetail } = dataSlice.actions;
-export default dataSlice.reducer;
+export const { getBookDetail, getPoetryDetail } = DataSlice.actions;
+export default DataSlice.reducer;

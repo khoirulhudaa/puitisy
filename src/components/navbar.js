@@ -3,7 +3,7 @@
 import Default from '@/public/default.jpeg'
 import Face from '@/public/face.jpeg'
 import Flower1 from '@/public/flower1.png'
-import store from '@/redux/Store'
+import store from '@/redux/store'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'

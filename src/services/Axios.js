@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_URL } from "./URL";
-import store from "../redux/Store";
+import { API_URL } from "./url";
+import store from "../redux/store";
 
 export const api = axios.create({
 	baseURL: API_URL,
