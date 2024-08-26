@@ -19,6 +19,7 @@ const Navbar = () => {
   const auth = store.getState().Auth?.auth
   
   const showLogoutConfirmation = () => {
+    setShowSidebar(false)
     Swal.fire({
       title: "Want to go out?",
       showCancelButton: true,
@@ -46,7 +47,7 @@ const Navbar = () => {
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {
-            popup: 'my-toast-auth',
+            popup: 'my-toast',
           }
         });
       }

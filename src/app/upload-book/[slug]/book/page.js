@@ -192,11 +192,11 @@ const Page = () => {
 
           {/* Button */}
           <div onClick={() => {loading ? null() : handleCreateBook()}} className={`relative flex items-center ${loading ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-blue-400 text-white cursor-pointer"} py-2 rounded-md w-max h-[40px] px-5 active:scale-[0.98] hover:brightness-[90%] duration-100`}>
-              {loading && <Spinner />}
-              <p>
-                Create Book
-              </p>
-            </div>
+            {loading && <Spinner />}
+            <p>
+              Create Book
+            </p>
+          </div>
         </form>
       </div>
     </section>

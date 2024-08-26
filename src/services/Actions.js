@@ -9,6 +9,9 @@ export const url_endpoint = {
 	accountSignIn: (body) => {
 		return api.post("/account/signin", body);
 	},
+	checkToken: (token) => {
+		return api.get(`/account/check-token/${token}`);
+	},
 	getAccountById: (id) => {
 		return api.get(`/account/${id}`);
 	},
@@ -16,10 +19,10 @@ export const url_endpoint = {
 		return api.put(`/account/update/${user_id}`, data);
 	},
 	forgotPassword: (email) => {
-		return api.post(`/account/forgot-password/`, data);
+		return api.post(`/email/forgot-password/`, email);
 	},
 	resetPassword: (id, data) => {
-		return api.post(`/account/reset-password/${id}`, data);
+		return api.put(`/account/reset-password/${id}`, data);
 	},
 
 

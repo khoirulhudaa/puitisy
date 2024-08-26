@@ -61,7 +61,7 @@ const Page = () => {
       <div className='hidden lg:flex w-[30%] h-screen overflow-hidden'>
         <Image src={BgLogin} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div id='form' className='relative w-screen lg:w-[70%] h-screen overflow-y-auto p-8 lg:p-12'>
+      <div id='form' className='relative w-screen lg:w-[70%] h-screen overflow-y-auto px-8 py-8 lg:py-5 lg:px-12'>
 
         {/* Flower */}
         <Image src={Flower1} alt='flower' width={370} height={370} className='hidden lg:flex absolute lg:fixed right-[-20%] lg:right-[-4%] lg:scale-1 scale-[0.5] bottom-[-10%] z-[1] opacity-10 lg:opacity-100' />

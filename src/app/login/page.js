@@ -3,15 +3,15 @@
 import Icons from '@/components/icons';
 import Flower1 from '@/public/flower1.png';
 import BgLogin from '@/public/login.jpeg';
+import { authSignIn, authSignOut, saveToken } from '@/redux/auth/AuthSlice';
+import { url_endpoint } from '@/services/Actions';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import '../globals.css';
-import { useRouter, useSearchParams } from "next/navigation";
-import { url_endpoint } from '@/services/Actions';
-import { authSignIn, authSignOut, saveToken } from '@/redux/auth/AuthSlice';
-import { useDispatch } from 'react-redux';
 
 const Page = () => {
 
@@ -42,8 +42,8 @@ const Page = () => {
         },
         title: "Register succesfully!",
       });
-      
-      router.push('/?success=true')
+
+      router.replace('/login', undefined, { shallow: true });
     }
   }, [router])
 
@@ -82,10 +82,10 @@ const Page = () => {
   
   return (
     <section className='w-screen h-screen overflow-x-hidden lg:flex'>
-       <div className='hidden lg:flex  w-[30%] h-screen overflow-hidden'>
+       <div className='hidden lg:flex w-[30%] h-screen overflow-hidden'>
         <Image src={BgLogin} alt='bg-login-side' className='w-full h-full object-cover' />
       </div>
-      <div className='relative w-scren lg:w-[70%] h-screen overflow-hidden p-8 lg:p-12'>
+      <div className='relative w-scren lg:w-[70%] h-screen overflow-hidden p-8 lg:py5 lg:px-12'>
 
         {/* Flower */}
         <Image src={Flower1} alt='flower' width={370} height={370} className='hidden lg:flex absolute lg:fixed right-[-10%] lg:scale-1 scale-[0.6] lg:right-[-4%] bottom-[-10%] z-[1] opacity-10 lg:opacity-100' />
@@ -111,12 +111,12 @@ const Page = () => {
 
           <br />
 
-          <div className='w-full flex mt-4 mb-10 flex-col h-[60px]'>
+          <div className='w-full flex mt-4 mb-12 flex-col h-[60px]'>
             <label className='mb-3 text-[16px]'>Password</label>
             <div className='flex w-full lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
               <input 
                 type={show ? 'text' : 'password'} 
-                name='email' 
+                name='password' 
                 value={password} 
                 placeholder='Enter Your Password...' 
                 onChange={(e) => setPassword(e.target.value)} 
@@ -127,6 +127,7 @@ const Page = () => {
               </div>
             </div>
           </div>
+          <small className='mt-4 flex items-center text-[16px]'>Forgot password ? <Link href={'/forgot-password'} className='ml-1'><span className='text-blue-400'>click here</span></Link></small>
 
           <br />
 
@@ -135,7 +136,7 @@ const Page = () => {
               <p>
                 Login
               </p>
-            </div>
+          </div>
 
             <small className='mt-4 flex items-center text-[16px]'>Don't have account ? <Link href={'/register'} className='ml-1'><span className='text-blue-400'>click here</span></Link></small>
         </form>

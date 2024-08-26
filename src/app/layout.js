@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
   const protectNavbar =
     pathname === "/login" ||
     pathname === "/register" ||
+    pathname === "/forgot-password" ||
     pathname.includes("/upload") ||
+    pathname.includes("/reset-password") ||
     pathname.includes("/edit");
 
   useEffect(() => {
