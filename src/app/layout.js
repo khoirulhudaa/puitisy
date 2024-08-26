@@ -2,7 +2,7 @@
 
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { persistor, store } from "@/redux/store";
+import { persistor, store } from "../redux/store";
 import Head from "next/head";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";

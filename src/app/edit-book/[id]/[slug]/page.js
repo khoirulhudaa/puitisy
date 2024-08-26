@@ -7,7 +7,7 @@ import Flower1 from '@/public/flower1.png';
 import Pen from '@/public/pen.png';
 import Trashs from '@/public/trash.png';
 import Upload3 from '@/public/upload3.jpeg';
-import store from '@/redux/store';
+import store from '../../../../redux/store';
 import { url_endpoint } from '@/services/actions';
 import Image from 'next/image';
 import Link from 'next/link';

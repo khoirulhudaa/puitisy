@@ -7,7 +7,7 @@ import Upload2 from '@/public/upload2.jpeg';
 import Upload3 from '@/public/upload3.jpeg';
 import Upload4 from '@/public/upload4.jpeg';
 import Upload5 from '@/public/upload5.jpeg';
-import store from '@/redux/store';
+import store from '../../../../redux/store';
 import { url_endpoint } from '@/services/actions';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 import '../../../globals.css';
 import Spinner from '@/components/spinner';
 import { useDispatch } from 'react-redux';
-import { getPoetryDetail } from '@/redux/auth/dataSlice';
+import { getPoetryDetail } from '../../../../redux/auth/dataSlice';
 
 const Page = () => {
 
