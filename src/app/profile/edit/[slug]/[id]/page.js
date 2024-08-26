@@ -38,7 +38,7 @@ const Page = () => {
     setInstagram(auth?.instagram)
     setBionarasi(auth?.bionarasi)
     setLocation(auth?.country)
-  }, [])
+  }, [auth?.penName, auth?.gender, auth?.year, auth?.instagram, auth?.bionarasi, auth?.country])
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

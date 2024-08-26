@@ -64,7 +64,7 @@ const Page = () => {
     }
 
     getAccount()
-  }, [status, dispatch])
+  }, [status, dispatch, auth?.user_id, poetry?.authorId, searchParams])
 
   const handleDelete = (title, id) => {
     Swal.fire({
@@ -280,8 +280,8 @@ const Page = () => {
               {
                 Array.isArray(books) && books.length > 0 ? (
                   books.map((_, index) => (
-                  <div className={`w-full lg:w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'lg:mx-3'}`}>
-                    <div key={index} className="w-full mb-5 h-full rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer duration-200 overflow-hidden">
+                  <div key={index} className={`w-full lg:w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'lg:mx-3'}`}>
+                    <div className="w-full mb-5 h-full rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer duration-200 overflow-hidden">
                     
                       <div className="relative w-full h-[60%] overflow-hidden object-cover">
                         {

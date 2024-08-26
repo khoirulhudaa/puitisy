@@ -45,7 +45,7 @@ const Page = () => {
     const images = [Upload1, Upload2, Upload3, Upload4, Upload5];
     const randomImage = images[Math.floor(Math.random() * images.length)];
     setSelectedImage(randomImage);
-  }, []);
+  }, [bookDetail, router, slug]);
 
   const handleEditorChange = (event, editor) => {
     const data = editor.getData();

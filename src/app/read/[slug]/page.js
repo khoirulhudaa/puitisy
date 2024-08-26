@@ -45,7 +45,7 @@ const Page = () => {
     }
 
     getAuthor()
-  }, [])
+  }, [poetry?.authorId, poetry?.book_id])
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''; // Mendapatkan URL saat ini
 

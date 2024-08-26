@@ -234,7 +234,7 @@ const Home = () => {
 
       <div className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-6 lg:py-20 h-max text-left lg:text-center flex flex-col lg:items-center justify-center px-3 lg:px-12 box-border">
          <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[0%] bottom-[0%] z-[1] opacity-15' />
-          <h2 className="text-[26px] lg:text-[40px] leading-normal lg:leading-loose w-[92vw] lg:w-[70vw] z-[333333]">"Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul."</h2>
+          <h2 className="text-[26px] lg:text-[40px] leading-normal lg:leading-loose w-[92vw] lg:w-[70vw] z-[333333]">&quot;Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul.&quot;</h2>
             <p className="relative before:absolute before:bottom-0 before:left-0 before:w-[90%] mt-3 text-[18px] before:h-[2px] before:bg-slate-500">Imam Al-Ghazali</p>
       </div>
 
@@ -262,7 +262,7 @@ const Home = () => {
               </div>
               <div className="w-full lg:w-[48.5%] border lg:mb-0 mb-5 border-slate-300 rounded-md px-6 py-8">
                 <h3 className="font-bold mb-3">Editing and Refining Poetry</h3>
-                <p className="leading-loose w-[90%] text-[14px] text-slate-600">Edit your poetry to improve clarity and emotional depth. Maintain rhythm and refine diction to ensure each line contributes effectively while preserving the poem's essence.</p>
+                <p className="leading-loose w-[90%] text-[14px] text-slate-600">Edit your poetry to improve clarity and emotional depth. Maintain rhythm and refine diction to ensure each line contributes effectively while preserving the poems essence.</p>
               </div>
               <div className="w-full lg:w-[48.5%] border border-slate-300 rounded-md px-6 py-8">
                 <h3 className="font-bold mb-3">Published and Winning Awards </h3>

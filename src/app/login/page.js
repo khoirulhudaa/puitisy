@@ -45,7 +45,7 @@ const Page = () => {
 
       router.replace('/login', undefined, { shallow: true });
     }
-  }, [router])
+  }, [router, dispatch, searchParams])
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -138,7 +138,7 @@ const Page = () => {
               </p>
           </div>
 
-            <small className='mt-4 flex items-center text-[16px]'>Don't have account ? <Link href={'/register'} className='ml-1'><span className='text-blue-400'>click here</span></Link></small>
+            <small className='mt-4 flex items-center text-[16px]'>Dont have account ? <Link href={'/register'} className='ml-1'><span className='text-blue-400'>click here</span></Link></small>
         </form>
       </div>
     </section>

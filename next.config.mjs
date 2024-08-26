@@ -10,10 +10,6 @@ const nextConfig = {
     devIndicators: {
         autoPrerender: false
     },
-    webpackDevMiddleware: config => {
-        config.hot = false;
-        return config;
-    },
     images: {
         domains: ['res.cloudinary.com'], // Tambahkan domain Cloudinary
     },

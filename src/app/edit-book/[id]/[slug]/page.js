@@ -39,7 +39,7 @@ const Page = () => {
     setTheme(bookDetail?.theme)
     setYear(bookDetail?.year)
     setSynopsis(bookDetail?.synopsis)
-  }, [])
+  }, [bookDetail?.synopsis, bookDetail?.theme, bookDetail?.title, bookDetail?.year])
   
   const handleFileChange = (e) => {
     const file = e.target.files[0];

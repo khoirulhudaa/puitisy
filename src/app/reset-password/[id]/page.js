@@ -50,7 +50,7 @@ const Page = () => {
     }
 
     getAccount()
-  }, [id])
+  }, [id, router])
 
   const handleSendEmail = async (e) => {
     e.preventDefault()
@@ -95,7 +95,7 @@ const Page = () => {
         setError(false)
         return;
     }
-  }, [confirmNewPassword])
+  }, [confirmNewPassword, newPassword])
 
   return (
     <div className='w-screen h-screen flex items-center justify-center'>
