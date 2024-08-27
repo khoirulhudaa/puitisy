@@ -200,13 +200,13 @@ const Page = () => {
               {
                 (data?.user_id === auth?.user_id) && (
                   <Link href={`/profile/edit/${slug}/${searchParams.get('author') === "invite" ? poetry?.authorId : auth?.user_id}`}>
-                      <div title='edit-profile' className='relative w-[40px] p-3 h-[40px] bg-white ml-5 shadaw-md hidden lg:flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
+                      <div title='edit-profile' className='relative w-[40px] p-3 h-[40px] bg-white ml-10 shadaw-md hidden lg:flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
                           <Image src={Pen} alt='icon-pen' width={20} height={20} />
                       </div>
                   </Link>
                 )
               }
-              <div onClick={() => setShowHero(!showHero)} className={`relative hidden lg:flex ml-5 cursor-pointer duration-100 hover:brightness-90 shadow-md items-center justify-center w-[40px] h-[40px] rounded-full bg-white`}>
+              <div onClick={() => setShowHero(!showHero)} className={`relative hidden lg:flex ml-10 cursor-pointer duration-100 hover:brightness-90 shadow-md items-center justify-center w-[40px] h-[40px] rounded-full bg-white`}>
                 <Image src={showHero ? ChevronUp : ChevronDown} alt='beginner-icon' width={18} height={18} className={`duration-200 relative ${showHero ? '-top-[1px]' : 'top-[1px]'} left-[-0.5px]`} />
               </div>
             </div>
