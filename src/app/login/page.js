@@ -3,7 +3,7 @@
 import Icons from '@/components/icons';
 import Flower1 from '@/public/flower1.png';
 import BgLogin from '@/public/login.jpeg';
-import { authSignIn, authSignOut, saveToken } from '../../redux/auth/authSlice';
+import { authSignIn, authSignOut, saveToken } from '@/redux/auth/authSlice';
 import { url_endpoint } from '@/services/actions';
 import Image from 'next/image';
 import Link from 'next/link';
