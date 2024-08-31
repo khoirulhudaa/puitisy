@@ -33,12 +33,13 @@ api.interceptors.response.use(
 		return response;
 	},
 	function (error) {
-		if (error.response.data.message === "Unauthenticated.") {
-			window.location.pathname = "/login";
-		} else if (error.response.message === `You don't have access permissions.` || error.response.status === 403) {
-			console.log("Error: ", error?.response);
-			window.location.pathname = "/login";
-		}
+		// if (error.response.data.message === "Unauthenticated.") {
+		// 	window.location.pathname = "/login";
+		// } else if (error.response.message === `You don't have access permissions.` || error.response.status === 403) {
+		// 	console.log("Error: ", error?.response);
+		// 	window.location.pathname = "/login";
+		// }
+		console.log(error)
 
 		return Promise.reject('erro:', error);
 	}
