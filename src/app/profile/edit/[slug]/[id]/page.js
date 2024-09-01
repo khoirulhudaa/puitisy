@@ -165,8 +165,8 @@ const Page = () => {
 
               <div className='w-full z-[444] lg:mt-0 mt-7 lg:w-max lg:flex items-center'>
                   <div className='w-full lg:flex h-max items-center'>
-                      <label className='text-[18px] mr-4'>Year Birth</label>
-                      <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                      <label className='mb-3 lg:text-[18px] mr-4'>Year Birth</label>
+                      <div className='flex w-full lg:mt-0 mt-3 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                       <input 
                           type='text' 
                           name='year' 
@@ -177,9 +177,9 @@ const Page = () => {
                       />
                       </div>
                   </div>
-                  <div className='w-full lg:flex h-max items-center'>
-                      <label className='text-[18px] mr-4'>Country</label>
-                      <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                  <div className='w-full lg:flex h-max items-center lg:mt-0 mt-4'>
+                      <label className='mb-3 lg:text-[18px] mr-4'>Country</label>
+                      <div className='flex w-full lg:mt-0 mt-3 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                       <input 
                           type='text' 
                           name='location' 
@@ -196,8 +196,8 @@ const Page = () => {
             <hr className='my-6 border border-slate-300' />
 
             <div className='w-full flex flex-col h-max mb-5'>
-                <label className='mb-6 text-[18px]'>Pen Name</label>
-                <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <label className='mb-3 lg:mb-6 text-[18px]'>Pen Name</label>
+                <div className='flex w-full lg:mt-0 mt-0 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                 <input 
                     type='text' 
                     name='name' 
@@ -209,8 +209,8 @@ const Page = () => {
                 </div>
             </div>
             <div className='w-full flex flex-col h-max mb-5'>
-                <label className='mb-6 text-[18px]'>Bionarasi</label>
-                <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <label className='mb-3 lg:mb-6 text-[18px]'>Bionarasi</label>
+                <div className='flex w-full lg:mt-0 mt-0 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                 <input 
                     type='text' 
                     name='bionarasi' 
@@ -222,8 +222,8 @@ const Page = () => {
                 </div>
             </div>
             <div className='w-full flex flex-col h-max mb-5'>
-                <label className='mb-6 text-[18px]'>Instagram</label>
-                <div className='flex w-full lg:mt-0 mt-4 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
+                <label className='mb-3 lg:mb-6 text-[18px]'>Instagram</label>
+                <div className='flex w-full lg:mt-0 mt-0 lg:w-[65%] border border-slate-300 rounded-lg px-5 items-center'>
                 <input 
                     type='text' 
                     name='instagram' 

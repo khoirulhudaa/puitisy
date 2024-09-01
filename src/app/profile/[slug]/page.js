@@ -217,12 +217,12 @@ const Page = () => {
             <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-5 lg:opacity-15' />
 
             <div className='w-full flex items-center justify-between'>
-              <div className='w-max flex items-center text-blue-600'>
-                  <Link href={'/'}>
-                      <Image src={ArrowLeft} alt='arrow-left' width={20} height={30} className='mr-1' />
-                  </Link>
-                  <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> {decodeURIComponent(slug)}</p>
-              </div>
+              <Link href={'/'} className='w-max h-max'>
+                <div className='w-max flex z-[3333] items-center text-blue-600'>
+                    <Image src={ArrowLeft} onClick={() => router.push('/')} alt='arrow-left' width={20} height={30} className='mr-1 z-[333333]' />
+                    <p className='relative lg:flex hidden top-[-2px] ml-1'>profile <span className='mx-1'>/</span> {decodeURIComponent(slug)}</p>
+                </div>
+              </Link>
 
               <div className='w-max flex items-center'> 
                 <p className='flex w-max'>{data && data?.year !== '-' ? data?.year : ''} ({data && data?.year !== '-' ? `${calculateDifference(data?.year)} - ${calculateDifference(data?.year) + 1} tahun` : 'Usia belum diketahui' }), <b className='ml-1'>{data?.country}</b></p>
