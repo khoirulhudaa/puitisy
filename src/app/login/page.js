@@ -54,6 +54,26 @@ const Page = () => {
       password,
     }
 
+    if(email === '' || password === '') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+    
+      Toast.fire({
+          icon: "warning",
+          customClass: {
+            popup: 'my-toast-auth'
+          },
+          title: 'All fields are required!',
+      });
+
+      return 
+    }
+
     const response = await url_endpoint.accountSignIn(data)
 
     if(response.data.status === 200) {

@@ -32,6 +32,26 @@ const Page = () => {
       penName
     }
 
+    if(email === '' || password === '') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+    
+      Toast.fire({
+          icon: "warning",
+          customClass: {
+            popup: 'my-toast-auth'
+          },
+          title: 'All fields are required!',
+      });
+
+      return
+    }
+
     const response = await url_endpoint.accountSignUp(data)
 
     if(response.status === 200) {
