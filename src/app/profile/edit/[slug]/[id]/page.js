@@ -153,7 +153,7 @@ const Page = () => {
 
         <div className='relative w-full px-4 lg:px-10 py-5'>
             {/* Flower */}
-            <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-15' />
+            <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-5 lg:opacity-15' />
 
             <div className='relative w-full z-[33] lg:flex justify-between items-center'>
               <div className='w-max flex items-center text-blue-600'>

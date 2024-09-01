@@ -12,11 +12,11 @@ const Hero = () => {
   return (
     <section className='relative overflow-hidden w-screen min-h-[60vh] lg:h-[84vh] bg-slate-900 text-center flex flex-col items-center justify-center'>
         {/* Background */}
-        <Image src={Lines} alt='flower' width={2000} height={1400} className='absolute left-[0%] top-0 z-[1] opacity-10' />
+        <Image src={Lines} alt='flower' width={2000} height={1400} className='absolute left-[0%] top-0 z-[1] lg:flex hidden opacity-10' />
         
         {/* Flowers */}
         <Image src={Flower1} alt='flower' width={350} height={350} className='absolute left-[-5%] top-0 transform rotate-[170deg] z-[1] opacity-10 lg:opacity-70' />
-        <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[-5%] bottom-[0%] z-[1] opacity-10 lg:opacity-65' />
+        <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[-5%] bottom-[0%] z-[1] lg:scale-1 scale-[0.7] opacity-5 lg:opacity-65' />
         
         <div className='relative z-[33] text-center flex flex-col items-center'>
             <h1 className='text-[40px] lg:text-[72px] font-normal relative text-transparent bg-clip-text bg-gradient-to-t from-slate-400 to-white'>Puitisy: Crafting Poetry</h1>

@@ -214,7 +214,7 @@ const Page = () => {
 
         <div className='relative w-full px-4 lg:px-10 py-5'>
             {/* Flower */}
-            <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-15' />
+            <Image src={Flower1} alt="flower" width={400} height={400} className='absolute right-[-5%] top-3 opacity-5 lg:opacity-15' />
 
             <div className='w-full flex items-center justify-between'>
               <div className='w-max flex items-center text-blue-600'>
@@ -243,7 +243,7 @@ const Page = () => {
             </div>
 
             <h2 className='font-bold lg:flex items-center text-[26px] lg:text-[36px]'>– {data?.penName ?? ''} <span className='lg:flex hidden'>-</span> <Image src={data && data?.gender === 'M' ? Male : data && data?.gender === 'F' ? Female : Netral} alt='arrow-left' width={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} height={data && (data?.gender === 'M' || data?.gender === 'F') ? 20 : 30} className='ml-3 lg:flex hidden' /></h2>
-            <p className='w-[90%] lg:w-[70%] text-slate-600 leading-loose'>– {data?.bionarasi === null || data?.bionarasi === '-' ? 'Bionarration has not been added to this account' : data?.bionarasi}</p>
+            <p className='w-[90%] lg:w-[70%] text-slate-600 lg:text-[16px] text-[14px] leading-loose'>– {data?.bionarasi === null || data?.bionarasi === '-' ? 'Bionarration has not been added to this account' : data?.bionarasi}</p>
             {/* <p className='w-[70%] text-slate-600 leading-loose'>– Mahasiswa semester 8 angkatan tahun 2021, asal dari prodi teknik informatika di STMIK IKMI KOTA CIREBON. Pria yang hobi berpuisi dan nogding serta olahrga futsal dan renang.</p> */}
             
             <hr className='my-6 border border-slate-300' />
@@ -256,7 +256,7 @@ const Page = () => {
                   <div className='flex items-center'>
                     <p className='mr-3 lg:flex hidden text-[17px]'>Create book</p>
                     <Link href={`/upload-book/${slug}/book/`}>
-                      <div className='relative w-[40px] h-[40px] rounded-full border border-slate-600 bg-white shadow-md z-40 flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90'>
+                      <div className='relative w-[35px] lg:w-[40px] h-[35px] lg:h-[40px] rounded-full border border-slate-600 bg-white shadow-md z-40 flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90'>
                         <Image src={Plus} alt="plus" width={20} height={20} />
                       </div>
                     </Link>

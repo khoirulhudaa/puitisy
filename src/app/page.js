@@ -37,22 +37,6 @@ const Home = () => {
     responseGetAllPoetry();
 
     if (searchParams.get('success') === "true") {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
-
-      Toast.fire({
-        icon: "success",
-        customClass: {
-          popup: 'my-toast'
-        },
-        title: "Login successfully!",
-      });
-
       router.replace('/', undefined, { shallow: true });
     }
   }, [searchParams, router]);
@@ -216,9 +200,9 @@ const Home = () => {
                 disabled={currentPage === 1}
                 className="px-3 py-2 border border-slate-300 rounded-md mr-2"
               >
-                Previous
+                Prev
               </button>
-              <span className="mx-1">Page <b>{currentPage}</b> of <b className="ml-1">{totalPages}</b></span>
+              <span className="mx-1"><b>{currentPage}</b> of <b className="ml-1">{totalPages}</b></span>
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
@@ -233,7 +217,7 @@ const Home = () => {
       </div>
 
       <div className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-6 lg:py-20 h-max text-left lg:text-center flex flex-col lg:items-center justify-center px-3 lg:px-12 box-border">
-         <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[0%] bottom-[0%] z-[1] opacity-15' />
+         <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[0%] bottom-[0%] z-[1] opacity-5 lg:opacity-15' />
           <h2 className="text-[26px] lg:text-[40px] leading-normal lg:leading-loose w-[92vw] lg:w-[70vw] z-[333333]">&quot;Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul.&quot;</h2>
             <p className="relative before:absolute before:bottom-0 before:left-0 before:w-[90%] mt-3 text-[18px] before:h-[2px] before:bg-slate-500">Imam Al-Ghazali</p>
       </div>
@@ -241,7 +225,7 @@ const Home = () => {
       <hr className="w-full my-8 border border-slate-300" />
       
       <div id="desc" className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-2 lg:py-20 h-max flex flex-col lg:items-end px-3 lg:px-12 box-border">
-         <Image src={Flower1} alt='flower' width={370} height={370} className='absolute left-[-4%] bottom-[0%] z-[1] opacity-15' />
+         <Image src={Flower1} alt='flower' width={370} height={370} className='absolute left-[-4%] bottom-[0%] z-[1] opacity-5 lg:opacity-15' />
           <h2 className="relative w-max text-[30px] lg:text-[36px] mb-6">– Is that poetry</h2>
           <p className="w-full lg:w-[80%] leading-loose">Poetry is a form of literary expression that uses structured, rhythmic language, often with emotional undertones, to convey ideas, feelings, or experiences. In poetry, every word is carefully chosen to create deeper meaning and aesthetic effects, often employing styles such as metaphor, simile, alliteration, and symbolism. –</p>
       </div>
@@ -249,7 +233,7 @@ const Home = () => {
       <hr className="w-full my-8 border border-slate-300" />
 
       <div id="tips" className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto pb-4 lg:pb-12 pt-2 lg:pt-12 h-max px-3 lg:px-12 box-border">
-         <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[-4%] top-[0%] z-[1] opacity-15' />
+         <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[-4%] top-[0%] z-[1] opacity-5 lg:opacity-15' />
           <h2 className="relative w-max text-[30px] lg:text-[36px] mb-6">– Go further!</h2>
           <div className="w-full flex justify-between items-center flex-wrap">
               <div className="w-full lg:w-[48.5%] mb-5 lg:mb-10 border border-slate-300 rounded-md px-6 py-8">
