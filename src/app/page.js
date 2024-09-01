@@ -103,7 +103,7 @@ const Home = () => {
   };
 
   return (
-    <section className="w-screen">
+    <section className="w-screen overflow-x-hidden">
       <Hero />
 
       {/* Content */}
@@ -216,9 +216,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-6 lg:py-20 h-max text-left lg:text-center flex flex-col lg:items-center justify-center px-3 lg:px-12 box-border">
+      <div className="relative overflow-hidden w-[96vw] lg:w-[100vw] mx-auto py-12 lg:py-20 h-max text-left lg:text-center flex flex-col lg:items-center justify-center px-3 lg:px-12 box-border">
          <Image src={Flower1} alt='flower' width={370} height={370} className='absolute right-[0%] bottom-[0%] z-[1] opacity-5 lg:opacity-15' />
-          <h2 className="text-[26px] lg:text-[40px] leading-normal lg:leading-loose w-[92vw] lg:w-[70vw] z-[333333]">&quot;Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul.&quot;</h2>
+          <h2 className="text-[24px] lg:text-[40px] leading-normal lg:leading-loose w-[92vw] lg:w-[70vw] z-[333333]">&quot;Words are the keys to the hearts. When wisdom is written, it unlocks the doors of knowledge, and when knowledge is shared, it illuminates the soul.&quot;</h2>
             <p className="relative before:absolute before:bottom-0 before:left-0 before:w-[90%] mt-3 text-[18px] before:h-[2px] before:bg-slate-500">Imam Al-Ghazali</p>
       </div>
 

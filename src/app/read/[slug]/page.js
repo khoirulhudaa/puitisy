@@ -242,7 +242,7 @@ const Page = () => {
   };
 
   return (
-    <section className='w-screen flex min-h-[80vh]'>
+    <section className='w-screen flex overflow-x-hidden min-h-[80vh]'>
 
       <div className='w-full p-4 lg:p-10 pt-8 lg:pt-10 pb-2'>
         <div className='w-full lg:flex items-center'>

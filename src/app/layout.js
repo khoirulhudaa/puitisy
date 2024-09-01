@@ -11,9 +11,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import "./globals.css";
 
 export default function RootLayout({ children }) {
-  const auth = store.getState().Auth?.auth
+  const auth = store.getState().Auth?.auth;
   const pathname = usePathname();
-  const router = useRouter()
+  const router = useRouter();
 
   const protectNavbar =
     pathname === "/login" ||
@@ -25,12 +25,12 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const isPublicPath =
-    pathname === "/" ||
-    pathname === "/login" ||
-    pathname === "/register" ||
-    pathname === "/forgot-password" ||
-    pathname.includes("/reset-password") ||
-    pathname.includes("/upload");
+      pathname === "/" ||
+      pathname === "/login" ||
+      pathname === "/register" ||
+      pathname === "/forgot-password" ||
+      pathname.includes("/reset-password") ||
+      pathname.includes("/upload");
 
     if (!auth || Object.keys(auth).length === 0) {
       if (!isPublicPath) {
@@ -41,23 +41,22 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+        <title>Puitisy - The World of Poetry</title>
+        <meta name="description" content="A place for writers to work digitally" />
+      </Head>
+      <body style={{ overflowX: "hidden" }}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            {/* Head hanya perlu satu kali digunakan untuk seluruh halaman */}
-            <Head>
-              <link
-                href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
-                rel="stylesheet"
-                type="text/css"
-              />
-              <title>Puitisy - The World of Poetry</title>
-              <meta
-                name="description"
-                content="A place for writers to work digitally"
-              />
-            </Head>
-
             {/* Navbar akan ditampilkan kecuali pada halaman yang dilindungi */}
             {!protectNavbar && <Navbar />}
 

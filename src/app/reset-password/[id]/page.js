@@ -98,7 +98,7 @@ const Page = () => {
   }, [confirmNewPassword, newPassword])
 
   return (
-    <div className='w-screen h-screen flex items-center justify-center'>
+    <div className='w-screen h-screen overflow-x-hidden flex items-center justify-center'>
         {/* Flower */}
         <Image src={Flower1} alt='flower' width={500} height={500} className='absolute lg:fixed right-[-10%] lg:right-[-14%] bottom-[-10%] z-[-1] opacity-10 lg:opacity-100' />
         <Image src={Flower1} alt='flower' width={400} height={400} className='fixed left-[-4%] top-[3%] z-[-1] opacity-10 lg:opacity-100' />
