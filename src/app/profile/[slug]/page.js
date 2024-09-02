@@ -8,20 +8,21 @@ import Border from '@/public/border.png'
 import ChevronDown from '@/public/chevron.png'
 import ChevronUp from '@/public/chevronUp.png'
 import Default from '@/public/default.jpeg'
-import Ten from '@/public/ten.png'
 import Female from '@/public/female.png'
 import Flower1 from '@/public/flower1.png'
 import Male from '@/public/male.png'
-import Pro from '@/public/pro.png'
 import Most from '@/public/most.png'
 import Netral from '@/public/N.png'
 import Pen from '@/public/pen.png'
 import Plus from '@/public/plus.png'
+import Pro from '@/public/pro.png'
 import Streak from '@/public/streak.png'
+import Ten from '@/public/ten.png'
 import Times from '@/public/times.png'
 import Trash from '@/public/trash.png'
 import Veteran from '@/public/veteran.png'
-import Winner from '@/public/winner.png'
+// import Winner from '@/public/winner.png'
+import checkDate from '@/app/helpers/getOneYear'
 import { authSignIn } from '@/redux/auth/authSlice'
 import { getBookDetail, getPoetryDetail } from '@/redux/auth/dataSlice'
 import store from '@/redux/store'
@@ -37,6 +38,7 @@ const Page = () => {
   
   const [data, setData] = useState(null)
   const [books, setBooks] = useState([])
+  const [allPoems, setAllPoems] = useState([])
   const [poems, setPoems] = useState([])
   const [status, setStatus] = useState(false)
   const [mute, setMute] = useState(false)
@@ -49,13 +51,17 @@ const Page = () => {
   const router = useRouter()
   const auth = store.getState().Auth?.auth
   const poetry = store.getState().Data?.poetry
+  console.log(auth)
 
   useEffect(() => {
     const getAccount = async () => {
+      const responseAllPoems = await url_endpoint.getAllPoetryByAuthorId(auth?.user_id)
       const response = await url_endpoint.getAccountById(searchParams.get('author') === "invite" ? poetry?.authorId : auth?.user_id)
       const responseBook = await url_endpoint.getBookByAuthorId(searchParams.get('author') === "invite" ? poetry?.authorId : auth?.user_id)
       setData(response?.data?.data)
+      setAllPoems(responseAllPoems?.data?.data)
       setBooks(responseBook?.data?.data)
+      console.log('books:', responseBook?.data?.data)
       dispatch(authSignIn(response?.data?.data))
     }
 
@@ -113,8 +119,10 @@ const Page = () => {
   }
 
   const getPoetryByBookId = async (id) => {
+    console.log(id)
     const response = await url_endpoint?.getAllPoetryByBookId(id)
     setPoems(response?.data?.data)
+    console.log('poemss:', response)
     setShowSide(true)
   }
 
@@ -160,22 +168,22 @@ const Page = () => {
               <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Beginner writer'>
                 <Image src={Beginner} alt='beginner-icon' width={20} height={20} />
               </div>
-              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Winner of competition'>
+              {/* <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Winner of competition'>
                 <Image src={Winner} alt='beginner-icon' width={20} height={20} />
-              </div>
-              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Collector of 10 poems'>
+              </div> */}
+              <div className={`${allPoems && allPoems?.length >= 10 ? 'flex' : 'hidden'} mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white`} title='Collector of 10 poems'>
                 <Image src={Ten} alt='beginner-icon' width={20} height={20} />
               </div>
-              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Collector of 50 poems'>
+              <div className={`${allPoems && allPoems?.length >= 20 ? 'flex' : 'hidden'} mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white`} title='Collector of 20 poems'>
                 <Image src={Streak} alt='beginner-icon' width={20} height={20} />
               </div>
-              <div className='hidden lg:flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Pro writer'>
+              <div className={`${allPoems && allPoems?.length >= 30 ? 'hidden lg:flex' : 'hidden'} mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white`} title='Pro writer'>
                 <Image src={Pro} alt='beginner-icon' width={20} height={20} />
               </div>
-              <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Collector of 100 poems'>
+              <div className={`${allPoems && allPoems?.length >= 30 ? 'flex' : 'hidden'} mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white`} title='Collector of 30 poems'>
                 <Image src={Most} alt='beginner-icon' width={20} height={20} />
               </div>
-              <div className='hidden lg:flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='This is Legend!'>
+              <div className={`${allPoems && (allPoems?.length >= 30 && checkDate(auth?.created_at)) ? 'hidden lg:flex' : 'hidden'} mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white`} title='This is Legend!'>
                 <Image src={Veteran} alt='beginner-icon' width={20} height={20} />
               </div>
             </div>

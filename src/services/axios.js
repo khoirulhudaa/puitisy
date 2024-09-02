@@ -33,6 +33,7 @@ api.interceptors.response.use(
 		return response;
 	},
 	function (error) {
+		console.log('ERROR SYSTEM:', error)
 		if (error.response.message === `You don't have access permissions.` || error.response.status === 403) {
 			console.log("Error: ", error?.response);
 			window.location.pathname = "/login";

@@ -36,6 +36,9 @@ export const url_endpoint = {
 	getAllPoetryByBookId: (book_id) => {
 		return api.get(`/poetry/${book_id}`)
 	},
+	getAllPoetryByAuthorId: (authorId) => {
+		return api.get(`/poetry/all/${authorId}`)
+	},
 	getPoetryById: (id) => {
 		return api.get(`/poetry/${id}`)
 	},
