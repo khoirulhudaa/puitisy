@@ -11,6 +11,7 @@ import '../globals.css';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { authSignOut } from '@/redux/auth/authSlice';
+import Spinner from '@/components/spinner';
 
 const Page = () => {
 
@@ -18,6 +19,7 @@ const Page = () => {
   const [password, setPassword] = useState('') 
   const [penName, setPenName] = useState('') 
   const [show, setShow] = useState(false) 
+  const [loading, setLoading] = useState(false) 
   const router = useRouter()
 
   useEffect(() => {
@@ -26,6 +28,7 @@ const Page = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const data = {
       email,
       password,
@@ -33,6 +36,7 @@ const Page = () => {
     }
 
     if(email === '' || password === '') {
+      setLoading(false)
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -40,23 +44,25 @@ const Page = () => {
         timerProgressBar: true,
         showConfirmButton: false,
       });
-    
+      
       Toast.fire({
-          icon: "warning",
-          customClass: {
-            popup: 'my-toast-auth'
-          },
-          title: 'All fields are required!',
+        icon: "warning",
+        customClass: {
+          popup: 'my-toast-auth'
+        },
+        title: 'All fields are required!',
       });
-
+      
       return
     }
-
+    
     const response = await url_endpoint.accountSignUp(data)
-
+    
     if(response.status === 200) {
+      setLoading(false)
       router.push('/login?success-register=true')
     } else {
+      setLoading(false)
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -143,8 +149,13 @@ const Page = () => {
           <br />
 
           {/* Button */}
-          <div onClick={(e) => handleRegister(e)} className='relative flex items-center bg-blue-400 py-2 text-white rounded-md w-max h-[70%] px-10 cursor-pointer active:scale-[0.98] hover:brightness-[90%] duration-100'>
-              <p>
+          <div onClick={(e) => {loading ? null() : handleRegister(e)}} className={`relative flex items-center py-2 rounded-md w-max h-[70%] px-10 ${loading ? "bg-slate-200 px-6 text-slate-400 cursor-not-allowed" : "bg-blue-400 text-white px-10 cursor-pointer active:scale-[0.98] hover:brightness-90"} duration-100`}>
+              {
+                loading && (
+                  <Spinner />
+                )
+              }
+              <p className={loading ? 'ml-2' : 'ml-0'}>
                 Register
               </p>
             </div>

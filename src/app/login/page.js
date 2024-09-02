@@ -12,11 +12,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import '../globals.css';
+import Spinner from '@/components/spinner';
 
 const Page = () => {
 
   const [email, setEmail] = useState('') 
   const [password, setPassword] = useState('') 
+  const [loading, setLoading] = useState(false) 
   const [show, setShow] = useState(false) 
 
   const router = useRouter();
@@ -49,11 +51,12 @@ const Page = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const data = {
       email,
       password,
     }
-
+    
     if(email === '' || password === '') {
       const Toast = Swal.mixin({
         toast: true,
@@ -62,27 +65,29 @@ const Page = () => {
         timerProgressBar: true,
         showConfirmButton: false,
       });
-    
+      
       Toast.fire({
-          icon: "warning",
+        icon: "warning",
           customClass: {
             popup: 'my-toast-auth'
           },
           title: 'All fields are required!',
-      });
+        });
 
-      return 
-    }
-
-    const response = await url_endpoint.accountSignIn(data)
-
-    if(response.data.status === 200) {
-      console.log('data data:', response.data.data)
-      dispatch(authSignIn(response?.data?.data))
-      dispatch(saveToken(response?.data?.token))
-      router.push('/?success=true')
-    } else {
-      const Toast = Swal.mixin({
+        setLoading(false)
+        return 
+      }
+      
+      const response = await url_endpoint.accountSignIn(data)
+      
+      if(response.data.status === 200) {
+        setLoading(false)
+        dispatch(authSignIn(response?.data?.data))
+        dispatch(saveToken(response?.data?.token))
+        router.push('/?success=true')
+      } else {
+        setLoading(false)
+        const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
         timer: 3000,
@@ -152,8 +157,13 @@ const Page = () => {
           <br />
 
           {/* Button */}
-          <div onClick={(e) => handleLogin(e)} className='relative flex items-center bg-blue-400 py-2 text-white rounded-md w-max h-[70%] px-10 cursor-pointer active:scale-[0.98] hover:brightness-[90%] duration-100'>
-              <p>
+          <div onClick={(e) => {loading ? null() : handleLogin(e)}} className={`relative flex items-center py-2 rounded-md w-max h-[70%] ${loading ? "bg-slate-200 px-6 text-slate-400 cursor-not-allowed" : "bg-blue-400 px-10 text-white cursor-pointer active:scale-[0.98] hover:brightness-90"} duration-100`}>
+              {
+                loading && (
+                  <Spinner />
+                )
+              }
+              <p className={loading ? 'ml-2' : 'ml-0'}>
                 Login
               </p>
           </div>

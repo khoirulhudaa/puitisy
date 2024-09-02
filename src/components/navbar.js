@@ -47,7 +47,7 @@ const Navbar = () => {
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {
-            popup: 'my-toast',
+            popup: 'my-toast-auth',
           }
         });
       }

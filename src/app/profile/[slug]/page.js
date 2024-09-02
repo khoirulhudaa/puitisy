@@ -164,7 +164,7 @@ const Page = () => {
         </div>
         
         <div className={`relative overflow-hidden lg:flex items-center justify-center w-full ${showHero ? 'h-0 duration-200 lg:h-[0vh]' : 'h-max lg:h-[45vh] duration-200'} lg:py-0 py-1 bg-slate-900`}>
-            <div className='relative lg:absolute lg:top-8 lg:mt-0 mt-10 lg:left-[10px] flex items-center justify-between w-full lg:w-max lg:scale-1 scale-[0.9]'>
+            <div className='relative lg:absolute lg:top-8 lg:mt-0 mt-6 left-[-6px] lg:left-[30px] flex items-center justify-between w-full lg:w-max lg:scale-1 scale-[0.9]'>
               <div className='flex mx-2 lg:mr-4 cursor-pointer duration-100 shadow-md border border-white items-center justify-center w-[40px] h-[40px] rounded-full bg-white' title='Beginner writer'>
                 <Image src={Beginner} alt='beginner-icon' width={20} height={20} />
               </div>
@@ -198,7 +198,7 @@ const Page = () => {
             <div className='absolute w-max flex items-center top-8 right-[40px]'>
               {
                 (data?.user_id === auth?.user_id) && (
-                  <Link href={`/upload-book/${auth?.penName}/book}`}>
+                  <Link href={`/upload-book/${auth?.penName}/book`}>
                       <div title='edit-profile' className='relative w-[40px] p-3 h-[40px] bg-white shadaw-md hidden lg:flex item-center justify-center rounded-full border border-slate-300 cursor-pointer active:scale-[0.97] z-[44] hover:brightness-[90%]'>
                           <Image src={Plus} alt='icon-pen' width={20} height={20} />
                       </div>
@@ -274,18 +274,6 @@ const Page = () => {
             </div>
             <div className={`w-full mt-8 flex flex-wrap ${Array.isArray(books) && books.length > 3 ? 'justify-between' : 'justify-start'}`}>
               {
-                 (data?.user_id === auth?.user_id && books.length > 0) && (
-                  <Link href={`/upload-book/${slug}/book`} className={`w-full lg:w-[23%] mb-5 flex ${books.length > 3 ? 'mr-0' : 'lg:mr-3'} items-center justify-center flex-col h-[350px] rounded-[12px] bg-white border border-slate-400 shadow-sm cursor-pointer active:scale-[0.98] duration-200 overflow-hidden`}>
-                    <div className='w-full flex items-center justify-center flex-col'>
-                      <div className='relative w-[60px] h-[60px] rounded-full border border-slate-600 bg-white shadow-md z-40 flex items-center justify-center cursor-pointer active:scale-[0.98] hover:brightness-90'>
-                          <Image src={Plus} alt="plus" width={20} height={20} />
-                      </div>
-                      <p className='mt-6'>Add new book</p>
-                    </div>
-                  </Link>
-                 )
-              }
-              {
                 Array.isArray(books) && books.length > 0 ? (
                   books.map((_, index) => (
                   <div key={index} className={`w-full lg:w-[23%] mb-5 h-[350px] ${books.length > 3 ? 'mx-0' : 'lg:mx-3'}`}>
@@ -330,9 +318,9 @@ const Page = () => {
                   </div>
                    ))
                 ) : (
-                  <div className='w-[90vw] mx-auto lg:mx-4 h-[350px] flex-col flex justify-center items-center lg:w-[92vw] border border-slate-300 rounded-lg p-4'>
+                  <div className='w-[90vw] mx-auto lg:mx-4 h-[350px] flex-col flex justify-center items-center lg:w-full border border-slate-300 rounded-lg p-4'>
                     {
-                      data?.user_id === auth?.user_id && (
+                      (data?.user_id === auth?.user_id && books.length === 0) && (
                         <Link href={`/upload-book/${slug}/book`}>
                           <div className='w-[50px] h-[50px] mb-5 flex items-center justify-center p-1 cursor-pointer active:scale-[0.97] hover:brightness-90 duration-75 border border-slate-400 rounded-full'>
                             <Image src={Plus} alt='icon-plus' width={24} height={24} />
